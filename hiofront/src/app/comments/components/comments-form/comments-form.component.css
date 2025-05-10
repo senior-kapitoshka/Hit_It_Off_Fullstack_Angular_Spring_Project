@@ -1,0 +1,51 @@
+.comment-form-textarea {
+  font-family: 'charming';
+  font-size: 2.5vw;
+    width: 60%;
+    height: 80px;
+    margin-bottom: 1vw;
+    margin-top: 1vw;
+    border-color: rgb(59, 59, 4);
+    box-shadow: 0px 8px 16px 0px #dbcca3;;
+    border-radius: 12%;
+    opacity:0.7;
+    background-color: #d0cab8;
+  }
+  
+  .comment-form-button {
+    font-size: 16px;
+    padding: 8px 16px;
+    background: #d0cab8;
+    border-color: rgb(59, 59, 4);
+    box-shadow: 0px 8px 16px 0px #dbcca3;;
+    border-radius: 8px;
+    color: black;
+    font-family: 'cardinal';
+    font-size:2vw;
+    height: 5vw;
+    width: 13vw;
+  }
+  
+  .comment-form-button:hover:enabled {
+    cursor: pointer;
+    background: #dbcca3;;
+  }
+  
+  .comment-form-button:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
+  
+  .comment-form-cancel-button {
+    margin-left: 10px;
+  }
+
+  .form{
+    display:flex;
+    justify-content: space-evenly;
+  }
+
+  .buttonGroup{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }

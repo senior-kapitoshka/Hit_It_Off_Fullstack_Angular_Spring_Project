@@ -1,0 +1,31 @@
+app:
+  clientUrl: http://localhost:4200
+spring:
+  application:
+    name: HIO
+  datasource:
+    url: jdbc:postgresql://localhost:5432/HIO
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: root
+    initialization-mode: always
+    continue-on-error: true
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    servlet:
+      multipart:
+        max-file-size: 2MB
+        max-request-size: 2MB
+        enabled: true
+token:
+  signing:
+    key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
+
+upload:
+  dir: C:/Users/me/Desktop/codewars/imgs/uploads

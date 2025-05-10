@@ -1,0 +1,3 @@
+<ng-container *ngIf="events$ | async as events">
+    <app-my-events [events]="events" (event)="selectEvent($event)" [headers]="headers"></app-my-events>
+</ng-container>

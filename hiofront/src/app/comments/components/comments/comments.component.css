@@ -1,0 +1,26 @@
+.comments {
+    margin-top: 20px;
+
+    padding: 1.5rem;
+  border-radius: 12px;
+  }
+
+  .comments-title {
+    font-size: 3vw;
+    margin-bottom: 1rem;
+    font-family: 'cardinal';
+
+  font-weight: bold;
+  text-align: center;
+
+  }
+
+  .comment-form-title {
+    font-size: 3vw;
+    font-family: 'cardinal';
+  }
+
+  .comments-container {
+    margin-top: 3vw;
+    font-family: 'cardinal';
+  }

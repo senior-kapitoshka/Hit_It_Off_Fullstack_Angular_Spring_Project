@@ -1,0 +1,3 @@
+<ng-container *ngIf="eventToUpdate$ | async as eventToEdit">
+<app-events-form [selectedEvent]="eventToEdit" (action)="edit($event)"></app-events-form>
+</ng-container>

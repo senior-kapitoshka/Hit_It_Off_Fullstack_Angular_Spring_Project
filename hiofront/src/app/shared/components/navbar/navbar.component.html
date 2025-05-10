@@ -1,0 +1,54 @@
+<!--
+<div class="avbar">
+  <a class="login" *ngIf="!showNav" [routerLink]="['../login']" routerLinkActive="router-link-active">Login</a>
+  <a *ngIf="showNav" [routerLink]="['../home']" routerLinkActive="router-link-active">Home</a>
+  <a *ngIf="showNav" [routerLink]="['../events']" routerLinkActive="router-link-active">Events</a>
+  <a *ngIf="showNav" [routerLink]="['../cities']" routerLinkActive="router-link-active">Cities</a>
+
+    <a  *ngIf="role==='ROLE_ADMIN'" [routerLink]="['../users']" routerLinkActive="router-link-active">Users</a>
+          <div  class="dropdown">
+            <button *ngIf="showNav" class="dropbtn">{{this.username}} 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a  [routerLink]="['../home/settings']" routerLinkActive="router-link-active">Settings</a>
+              <a  (click)="logout()">Logout</a>
+            </div>
+          </div> 
+</div>
+-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">HitItOff</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+      <a class="login" *ngIf="!showNav" [routerLink]="['../login']" routerLinkActive="router-link-active">Login</a>
+    </li>
+      <li class="nav-item">
+        <a *ngIf="showNav" [routerLink]="['../home']" routerLinkActive="router-link-active">Home</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="showNav" [routerLink]="['../events']" routerLinkActive="router-link-active">Events</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="showNav" [routerLink]="['../cities']" routerLinkActive="router-link-active">Cities</a>
+    </li>
+    <li class="nav-item">
+      <a  *ngIf="role==='ROLE_ADMIN' && showNav" [routerLink]="['../users']" routerLinkActive="router-link-active">Users</a>
+    </li>
+      <li class="nav-item dropdown">
+        <a *ngIf="showNav" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ username }}
+        </a>
+        <ul *ngIf="showNav" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <li><a *ngIf="showNav"  class="dropdown-item" routerLink="/home/settings">Settings</a></li>
+          <li><a *ngIf="showNav"  class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

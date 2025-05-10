@@ -1,0 +1,106 @@
+body{
+  min-height: 100vh;
+  width:  100%;
+  background-image: url("/assets/png/book.png");
+  background-blend-mode:overlay;
+  background-size: 43vw 40vw;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-position-y: 80%;
+  /*background-position-x:50%;
+  background-position-y:80%;*/
+  
+  }
+
+.dateAndClear{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.header{
+  text-align: center;
+    font-family: 'cardinal';
+    font-size: 5vw; 
+}
+
+.restrictions{
+    margin:1.5rem;
+    font-family: 'cardinal';
+    font-size: 4vw;
+}
+.event-form {
+    font-family: 'charming';
+    font-size: 2.3vw;
+    min-width: 500px;
+    max-width: 800px;
+    width: 100%;
+  }
+
+.example-full-width {
+  width: 100%;
+}
+
+.form-card {
+    font-family: 'charming';
+    font-size: 2.3vw;
+    color: black;
+
+    min-width: 5vw;
+    max-width: 57vw;
+
+    margin:auto;
+
+    display: flex;
+
+
+    
+}
+
+.button-group {  
+  text-align: center;
+    float:bottom;
+    margin-bottom: 15px;
+    font-family: 'cardinal';
+    font-size: 4vw;
+    padding: 5vw;
+}
+
+mat-form-field {
+    margin-right: 30vw;
+  }
+
+
+  ::ng-deep .mat-datepicker-toggle{
+  }
+  ::ng-deep .datepicker {
+    background: #a09782;
+    border-radius: 10%;
+    box-shadow: 0px 8px 8px 0px #dbcca3;;
+  }
+  ::ng-deep .mat-calendar-body{
+    font-family: 'cardinal';
+    font-size: 1.6vw;
+  }
+  ::ng-deep .mat-calendar-body-cell-content{
+    border-radius: 10%;
+    background: #dad1bd;
+  }
+
+
+  ::ng-deep .datepicker .mat-calendar-body-today:not(.mat-calendar-body-selected){
+    font-family: 'charming';
+    font-size: 2.3vw;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+  
+  .custom-file-upload {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-align: center;
+  }

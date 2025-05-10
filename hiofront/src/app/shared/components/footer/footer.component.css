@@ -1,0 +1,12 @@
+.foot{
+    margin-bottom: 0.5rem;
+    float:right;
+    overflow: hidden;
+    font-family: 'charming';
+    font-size: 1.7vw;
+    color: black;
+    
+}
+.link{
+    color:black
+}

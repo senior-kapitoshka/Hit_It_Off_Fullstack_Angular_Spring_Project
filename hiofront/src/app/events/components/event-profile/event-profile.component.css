@@ -1,0 +1,16 @@
+
+
+.card{
+    border-color: rgb(59, 59, 4);
+    box-shadow: 0px 8px 16px 0px #dbcca3;;
+    width:100%;
+    font-family: 'white_storm';
+    font-size:4vw;
+    color: black;
+    background-color: #d0cab8;
+    opacity:0.7;
+}
+.card:hover{
+    background-color: #c6ba98;
+   cursor: pointer; 
+}

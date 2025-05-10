@@ -1,0 +1,29 @@
+<body>
+
+        <div class="container-fluid m-3">
+            <div class="d-flex flex-column align-items-center">
+              <div *ngFor="let eventProfile of paginatedEvents" class="mb-3 w-100 w-md-80 w-lg-75">
+                <app-event-profile [eventProfile]="eventProfile"></app-event-profile>
+              </div>
+        
+            <nav
+            *ngIf="paginatedEvents.length>=5"
+               aria-label="paginator">
+              <ul class="pagination justify-content-center mt-4">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link"  (click)="changePage(currentPage - 1)">prev</a>
+                </li>
+          
+                <li *ngFor="let page of pages" class="page-item" [class.active]="page === currentPage">
+                  <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                </li>
+          
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link"  (click)="changePage(currentPage + 1)">next</a>
+                </li>
+              </ul>
+          </nav>
+    </div>
+    </div>
+</body>
+

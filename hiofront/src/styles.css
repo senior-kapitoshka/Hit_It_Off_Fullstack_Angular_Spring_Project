@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #d2ccbc;
+    overflow: visible
+   
+}
+
+@font-face {
+    font-family: cardinal;
+    src: url(assets/fonts/cardinal/Cardinal.ttf) format("opentype");
+}
+
+@font-face {
+    font-family: white_storm;
+    src: url(assets/fonts/white_storm/White\ Storm.otf) format("opentype");
+}
+
+@font-face {
+    font-family: charming;
+    src: url(assets/fonts/charming/Achafsex.ttf) format("opentype");
+}
+

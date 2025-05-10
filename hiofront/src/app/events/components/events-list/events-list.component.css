@@ -1,0 +1,27 @@
+
+.pagination {
+    font-family: 'white_storm';
+    font-size: 4vw !important;
+  }
+  ul.pagination li.page-item a.page-link {
+    font-size: 3vw !important;  /* Пробуем явно увеличить */
+  }
+
+  
+  .page-item .page-link {
+    background-color: #a09782;
+    color: #333;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+  }
+  
+  .page-item.active .page-link {
+    background-color: #c6ba98;
+    color: white;
+    border-color: #8d8d8d;
+  }
+  
+  .page-item.disabled .page-link {
+    background-color: #eee;
+    color: #aaa;
+  }

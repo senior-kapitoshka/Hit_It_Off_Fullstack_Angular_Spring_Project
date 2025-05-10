@@ -1,0 +1,49 @@
+.eventCont{
+    padding-top: 5%;
+    display: grid;
+    grid-template-rows: 12vw 7vw;
+    grid-auto-rows: 40px;
+    gap: 2vw;
+}
+body{
+    min-height: 100vh;
+    width:  100%;
+    background-image: url("/assets/png/frog.png");
+    background-blend-mode:overlay;
+    background-size: 43vw 40vw;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-position-y: 80%;
+    /*background-position-x:50%;
+    background-position-y:80%;*/
+    
+    }
+
+    .pagination {
+        font-family: 'white_storm';
+        font-size: 4vw !important;
+      }
+      ul.pagination li.page-item a.page-link {
+        font-size: 3vw !important;  /* Пробуем явно увеличить */
+      }
+    
+      
+      .page-item .page-link {
+        background-color: #a09782;
+        color: #333;
+        border: 1px solid #ccc;
+        transition: all 0.3s ease;
+      }
+      
+      .page-item.active .page-link {
+        background-color: #c6ba98;
+        color: white;
+        border-color: #8d8d8d;
+      }
+      
+      .page-item.disabled .page-link {
+        background-color: #eee;
+        color: #aaa;
+      }
+  

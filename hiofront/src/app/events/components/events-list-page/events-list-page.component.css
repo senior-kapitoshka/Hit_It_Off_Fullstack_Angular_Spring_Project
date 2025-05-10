@@ -1,0 +1,11 @@
+body{
+  min-height: 100vh;
+  width:  100%;
+  background-image: url("/assets/png/beer_swords.png");
+  background-blend-mode:overlay;
+background-size: 37vw 50vw;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center;
+background-position-y: 87%;
+}

@@ -1,0 +1,123 @@
+/*body{
+    min-height: 100vh;
+    width:  100%;
+    background-image: url("/assets/png/kitten-warrior.png");
+    background-blend-mode:overlay;
+    background-size: 53vw 50vw;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-position-y: 80%;
+    font-family: 'cardinal';
+    font-size: 5vw;
+    letter-spacing: normal;
+    }
+  .text-container{
+
+    text-align: center;
+    font-family: 'cardinal';
+    font-size: 2.5vw;
+    letter-spacing: normal;
+    margin-top: 1.5vw;
+  white-space: pre;
+  }
+
+  .toggle {
+    text-align: center;
+    font-size: 5vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: top 0.5s ease, transform 0.5s ease;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .toggle.moved {
+    top: 20%; 
+    transform: translateY(0); 
+  }*/
+
+
+  body {
+    margin: 0.8rem;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    font-family: 'cardinal';
+    font-size: 5vw;
+    letter-spacing: normal;
+  
+    background-image: url("/assets/png/kitten-warrior.png");
+    background-size: 53vw 50vw;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 18%;
+
+    background-blend-mode: overlay;
+
+    text-align: center;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Фон находится под контентом */
+  }
+  
+  @media (max-width: 1024px) {
+    body {
+      background-size: 64vw 60vw;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    body {
+      background-size: 75vw 70vw;
+      background-position: center 45%;
+    }
+    .toggle.moved {
+      transform: translateY(-17vw); 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      background-size: 100vw auto;
+      background-position: center 90%;
+    }
+  }
+  
+  
+  .toggle {
+    font-size: 5vw;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    transform: translateY(0);
+  }
+  
+  .toggle.moved {
+    transform: translateY(-17vw); 
+  }
+  
+  .text-container {
+    font-family: 'cardinal';
+    font-size: 2.5vw;
+    letter-spacing: normal;
+    white-space: pre;
+    margin-top: 3vw;
+    opacity: 1;
+    transition: margin-top 0.5s ease;
+  }
+  
+  

@@ -1,0 +1,122 @@
+<div *isGranted="'ROLE_USER'">
+  <div class="decorative-frame-card">
+  <mat-card class="card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title-group class="titleGroup">
+        <mat-card-title class="title"> ⚔ {{event?.eventName}} ⚔ </mat-card-title>
+        <mat-card-subtitle class="subtitle">⚜ {{correctDate(event!.eventDate)}} ⚜</mat-card-subtitle>
+        <mat-card-subtitle class="subtitle">{{event?.city}}</mat-card-subtitle>
+        <div class="decorative-frame-img">
+          <img *ngIf="event?.eventImg" mat-card-xl-image [src]="getImageUrl(event?.eventImg)" alt="Event Image" class="foto">
+        </div>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content class="content">
+      {{event?.description}}
+    </mat-card-content>
+    &nbsp;
+    <ng-container *ngIf="event?.restrictions">
+      <mat-card-content class="party">
+        participants: {{this.inParty}}/{{event?.restrictionsLimit}}
+      </mat-card-content>
+    </ng-container>
+
+    <ng-container *ngIf="!event?.restrictions">
+      <mat-card-content class="party">
+        participants: {{this.inParty}}
+      </mat-card-content>
+    </ng-container>
+  </mat-card>
+</div>
+
+
+</div>
+
+<div *isGranted="'ROLE_MUTED'">
+
+  <div class="decorative-frame-card">
+    <mat-card class="card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title-group class="titleGroup">
+          <mat-card-title class="title"> ⚔ {{event?.eventName}} ⚔ </mat-card-title>
+          <mat-card-subtitle class="subtitle">⚜ {{correctDate(event!.eventDate)}} ⚜</mat-card-subtitle>
+          <mat-card-subtitle class="subtitle">{{event?.city}}</mat-card-subtitle>
+          <div class="decorative-frame-img">
+            <img *ngIf="event?.eventImg" mat-card-xl-image [src]="getImageUrl(event?.eventImg)" alt="Event Image" class="foto">
+          </div>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content class="content">
+        {{event?.description}}
+      </mat-card-content>
+      &nbsp;
+      <ng-container *ngIf="event?.restrictions">
+        <mat-card-content class="party">
+          participants: {{this.inParty}}/{{event?.restrictionsLimit}}
+        </mat-card-content>
+      </ng-container>
+  
+      <ng-container *ngIf="!event?.restrictions">
+        <mat-card-content class="party">
+          participants: {{this.inParty}}
+        </mat-card-content>
+      </ng-container>
+    </mat-card>
+  </div>
+  
+  </div>
+
+<div *isGranted="'ROLE_ADMIN'">
+
+<table mat-table [dataSource]="[event]" class="mat-elevation-z8">
+    <ng-container *ngFor="let item of headers" [matColumnDef]="item.fieldName">
+      <th mat-header-cell *matHeaderCellDef [style.font-size]="'2vw'" [style.font-family]="'white_storm'"> {{item.header}} </th>
+      <td mat-cell *matCellDef="let element"[style.font-size]="'2vw'"  [style.font-family]="'cardinal'"> {{item.fieldName!=='usersAmount'?element[item.fieldName]:this.inParty}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+     <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let element"> 
+      </td>    
+    </ng-container>  
+      <tr mat-header-row *matHeaderRowDef="eventNamesFields"></tr> 
+           
+    <tr mat-row *matRowDef="let row; columns: eventNamesFields"></tr>
+  </table>
+</div>
+
+@if (event!=null?(event!.creatorId===this.currentUserId):(true)){  
+  <div class="controlGroup">
+    <button (click)="selectEvent(event!, 2)" mat-raised-button color="primary">
+      🕸 Edit 🕸
+  </button>  
+  &nbsp;
+  <button (click)="pendingDeleteEvent = event!" 
+  mat-raised-button
+  color="warn"
+  data-bs-toggle="modal"
+  data-bs-target="#deleteConfirmModal">
+    ☠ Delete ☠
+  </button>
+  </div>   }
+
+
+<!---->
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">⋆༺𓆩☠ Confirm Deletion ☠︎︎𓆪༻⋆</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this event?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn cancel" data-bs-dismiss="modal"> ♱ Cancel ♱ </button>
+        <button type="button" class="btn confirmDelete" (click)="confirmDelete()"> 🗡 Yes, Delete 🗡</button>
+      </div>
+    </div>
+  </div>
+</div>

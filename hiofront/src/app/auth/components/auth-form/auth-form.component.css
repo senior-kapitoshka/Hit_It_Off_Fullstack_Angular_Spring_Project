@@ -1,0 +1,47 @@
+body{
+    min-height: 100vh;
+    width:  100%;
+    background-image: url("/assets/png/guard.png");
+    background-blend-mode:overlay;
+    background-size: 38vw 35vw;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-position-y: 85%;
+}
+
+
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+  
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+
+
+
+.text-center{
+  font-family: 'cardinal';
+    font-size: 5vw; 
+}
+
+.text-center1{
+  font-family: 'cardinal';
+    font-size: 3.5vw; 
+}
+
+.content{
+    font-family: 'charming';
+    font-size: 2.3vw;
+    min-width: 500px;
+    max-width: 800px;
+    width: 100%;
+}
+
+

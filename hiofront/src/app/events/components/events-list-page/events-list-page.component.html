@@ -1,0 +1,6 @@
+<body>
+<app-events-command-bar *ngIf="this.notMuted" (action)="executeCommandBarAction($event)"></app-events-command-bar>
+<ng-container *ngIf="events$ | async as events">
+    <app-events-list [events]="events" (event)="selectEvent($event)" [headers]="headers"></app-events-list>
+</ng-container>
+</body>

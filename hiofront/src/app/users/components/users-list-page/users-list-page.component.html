@@ -1,0 +1,5 @@
+<body>
+    <ng-container *ngIf="users$ | async as users">
+        <app-users-list [users]="users" (event)="selectUser($event)" [headers]="headers" ></app-users-list>
+    </ng-container>
+ </body>

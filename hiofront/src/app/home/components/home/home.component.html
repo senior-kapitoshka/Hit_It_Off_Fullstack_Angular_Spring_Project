@@ -1,0 +1,28 @@
+<body>
+<div>
+    <div class="hello">
+        {{hello()}}
+     </div>   
+</div>
+<div class="info" *ngIf="this.details!==undefined">
+    ༒︎ You are subscribed to {{this.details.user.eventsAmount}} events ༒︎
+</div>
+
+<div *ngIf="this.upcomingEvent!==undefined">
+
+<div class="upcoming">Upcoming event:</div> 
+    <ng-container  class="eventCont">
+        <app-event-profile [eventProfile]="this.upcomingEvent"/>
+    </ng-container>
+
+<div class="more" >
+    <button (click)="showUserEvents()"type="submit"  mat-button>✶More events✶</button>
+ </div> 
+ 
+ </div>
+
+ <div class="noEvents" *ngIf="this.upcomingEvent===undefined">   
+    It looks like you don't have anything planned, but you can find events that interest you or create your own <p class="here" (click)="toEvents()">⚔ here ⚔</p>
+
+ </div>
+</body>

@@ -1,0 +1,7 @@
+.eventCont{
+    padding-top: 5%;
+    display: grid;
+    grid-template-rows: 12vw 7vw;
+    grid-auto-rows: 40px;
+    gap: 2vw;
+}

@@ -1,0 +1,25 @@
+<body>
+  <div 
+  *ngIf="!this.showAbout"
+  class="toggle" 
+  [class.moved]="isMoved"
+  (click)="toggleTyping()"
+    >⛧°  。 ⋆༺⚜ HitItOff ⚜༻⋆   。°⛧</div>   
+  
+    <div class="text-container" (click)="toggleTyping()">
+      <span *ngFor="let letter of about">{{ letter }}</span>
+    </div>
+  
+</body>
+
+ <!-- <h5>Long ago, in the age of swords and sorcery, heroes roamed untamed lands in search of answers. Brave knights journeyed through shadowed forests and uncharted realms, hoping to stumble upon a sage with a quest. Lonely maidens awaited champions who could lift ancient curses. Helpless villagers gazed toward the heavens, praying for someone—anyone—to rid them of a dragon’s wrath.</h5>
+
+<h5> Back then, finding the right person was a quest in itself.</h5>
+    
+<h5> But times have changed. The web is the new wilderness, and the quest board has gone digital. </h5>
+    
+<h5>   Introducing ⚜ HitItOff ⚜ the app that brings kindred spirits together faster than you can roll for initiative. Whether you’re searching for a creative partner, a fellow gamer, a philosophical sparring partner, or someone who simply gets you, ⚜ HitItOff ⚜ helps you find the one with whom you’ll, well… hit it off. </h5>
+    
+<h5>  Built on the idea that meaningful connections shouldn’t require epic trials, our app makes it easy to discover people you naturally click with—those who speak your language, share your values, and might just be the missing party member on your journey.</h5>
+    
+<h5>   So leave the endless wandering to the NPCs. The era of chance meetings is over. With ⚜ HitItOff ⚜, the right person is never more than a few clicks away. </h5>-->

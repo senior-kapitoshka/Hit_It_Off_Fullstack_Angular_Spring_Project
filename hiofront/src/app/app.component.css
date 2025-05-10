@@ -1,0 +1,26 @@
+.footer{
+    position:fixed;
+    width:95%;
+    bottom:0px;
+    z-index: 1
+}
+
+.container{
+    overflow: visible;
+    z-index: 1
+}
+
+.decorative-frame {
+    border: 30px solid transparent;
+    padding: 5px;
+    border-image: url('/assets/png/border_img.png') 100 round;
+    
+    background-color: transparent; 
+    
+    box-sizing: border-box;
+  }
+  
+  .content {
+    text-align: center;
+  }
+  

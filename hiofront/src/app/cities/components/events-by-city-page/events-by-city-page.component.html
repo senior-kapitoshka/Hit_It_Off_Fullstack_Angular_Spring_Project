@@ -1,0 +1,5 @@
+<body>
+    <ng-container *ngIf="cityEvents$ | async as events">
+        <app-events-by-city [events]="events" (event)="selectEvent($event)" [headers]="headers"></app-events-by-city >
+        </ng-container>        
+</body>

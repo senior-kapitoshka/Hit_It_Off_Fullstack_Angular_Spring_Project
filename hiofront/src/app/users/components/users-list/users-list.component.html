@@ -1,0 +1,32 @@
+<!-- matSort для сортировки-->
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"  >
+    <ng-container *ngFor="let item of headers" [matColumnDef]="item.fieldName">
+      <!-- mat-sort-header для сортировки-->
+        <th mat-header-cell 
+      *matHeaderCellDef  
+      mat-sort-header="{{item.fieldName}}" 
+      [style.font-size]="'1.6vw'" 
+      [style.font-family]="'white_storm'" > {{item.header}} </th>
+      <td mat-cell *matCellDef="let element" [style.font-size]="'1.6vw'" [style.font-family]="'cardinal'" > {{element[item.fieldName]}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef [style.font-size]="'1.6vw'" [style.font-family]="'white_storm'" > Actions </th>
+        <td mat-cell *matCellDef="let element"> 
+            <button (click)="selectUser(element, 6)" mat-raised-button color="primary" [style.font-size]="'1.6vw'" [style.font-family]="'cardinal'" >
+                {{element.role==='ROLE_ADMIN'?"to User":"to Admin"}}
+            </button>  
+            <button (click)="selectUser(element, 4)" mat-raised-button color="primary" [style.font-size]="'1.6vw'" [style.font-family]="'cardinal'" >
+                {{element.role==='ROLE_BANNED'?"Unblock":"Block"}}
+            </button>
+            <button (click)="selectUser(element, 5)" mat-raised-button color="primary" [style.font-size]="'1.6vw'" [style.font-family]="'cardinal'" >
+                {{element.role==='ROLE_MUTED'?"Unmute":"Mute"}}
+            </button>  
+            <button (click)="selectUser(element, 1)" mat-raised-button color="primary" [style.font-size]="'1.6vw'" [style.font-family]="'cardinal'" >
+                Delete
+            </button>    
+        </td>  
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="eventNamesFields"></tr>
+    <tr mat-row *matRowDef="let row; columns: eventNamesFields"></tr>
+  </table>

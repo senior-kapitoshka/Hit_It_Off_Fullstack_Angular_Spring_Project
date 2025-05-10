@@ -1,0 +1,98 @@
+
+
+<body>
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-4">
+  
+            <!-- Форма -->
+            <div class="flex-fill">
+              <mat-card class="w-100">
+                <mat-card-title class="text-center">⛧{{ title }}⛧</mat-card-title>
+                <mat-card-content class="content">
+                  <form [formGroup]="form" (ngSubmit)="emitAction()">
+                    <p *ngIf="error" class="error">{{ error }}</p>
+  
+                    <p *ngIf="title == 'Join' || title == 'Login'">
+                      <mat-form-field class="w-100">
+                        <input type="text" matInput placeholder="Username" formControlName="username" />
+                      </mat-form-field>
+                    </p>
+  
+                    <p *ngIf="title == 'Join' || title == 'Login'">
+                      <mat-form-field class="w-100">
+                        <input type="password" matInput placeholder="Password" formControlName="password" />
+                      </mat-form-field>
+                    </p>
+  
+                    <p *ngIf="title == 'Join' || title == 'Update'">
+                      <mat-form-field class="w-100" appearance="fill">
+                        <input
+                          *ngIf="title == 'Join'"
+                          type="text"
+                          matInput
+                          placeholder="Email"
+                          formControlName="email"
+                        />
+                        <input
+                          *ngIf="title == 'Update'"
+                          type="text"
+                          matInput
+                          formControlName="email"
+                          [ngModel]="this.email"
+                          autocomplete="off"
+                        />
+                      </mat-form-field>
+                    </p>
+  
+                    <p *ngIf="title == 'Update'">
+                      <mat-form-field class="w-100" appearance="fill">
+                        <input
+                          type="text"
+                          matInput
+                          formControlName="city"
+                          [ngModel]="this.city"
+                          autocomplete="off"
+                        />
+                      </mat-form-field>
+                    </p>
+  
+                    <p *ngIf="title == 'Update'">
+                      <mat-form-field class="w-100" appearance="fill">
+                        <input
+                          type="text"
+                          matInput
+                          formControlName="about"
+                          [ngModel]="this.about"
+                          autocomplete="off"
+                        />
+                      </mat-form-field>
+                    </p>
+  
+                    <div class="d-grid mt-3">
+                      <button type="submit" mat-raised-button color="primary">⋆{{ title }}⋆</button>
+                    </div>
+                  </form>
+                </mat-card-content>
+              </mat-card>
+            </div>
+  
+            <!-- Навигация -->
+            <div class="text-center1 w-100 w-md-auto d-flex flex-column align-items-center gap-2">
+              <ng-container *ngIf="title === 'Login'">
+                <p>First time?</p>
+                <button [routerLink]="['../join']" mat-button>⚜ Create account ⚜</button>
+              </ng-container>
+  
+              <ng-container *ngIf="title === 'Join'">
+                <p>Already have an account?</p>
+                <button [routerLink]="['../login']" mat-button>⚜ Sign In ⚜</button>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  

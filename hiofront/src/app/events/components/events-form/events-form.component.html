@@ -1,0 +1,88 @@
+<body>
+  <body>
+    <mat-card class="form-card">
+        <p class="header">🕷 {{ selectedEvent ? "Update" : "Create" }} event 🕷</p>
+        <form class="events-form" [formGroup]="form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>City</mat-label>
+            <input
+              matInput
+              formControlName="city"
+              placeholder="New York"
+              data-cy="city"
+            />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Event Name</mat-label>
+            <input
+              matInput
+              formControlName="eventName"
+              placeholder="Gig"
+              data-cy="eventName"
+            />
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input
+              matInput
+              formControlName="description"
+              placeholder="i just wanna have some fun"
+              data-cy="description"
+            />
+          </mat-form-field>
+        <div>
+          <!--<mat-label>Event Image</mat-label>-->
+        <!-- Убираем mat-form-field и используем только input[type="file"] -->
+            <label for="file-upload" class="custom-file-upload">
+              ⋆༺𓆩 🕯 Click ✶ HERE ✶ to upload an image you want to attach to the event (max 2MB) 🕯 𓆪༻⋆
+          </label>
+            <input id="file-upload"  type="file" (change)="onFileSelected($event)" />
+        </div>
+          <input type="checkbox"  (change)="this.restrict=!this.restrict">
+            <label for="restrictions" class="restrictions"> Restrictions</label><br>
+    
+          <mat-form-field *ngIf="this.restrict" class="example-full-width" appearance="fill">
+            <mat-label>Limit</mat-label>
+            <input
+              matInput
+              formControlName="restrictionsLimit"
+              placeholder="please enter a number here"
+              data-cy="restrictionsLimit"
+            />
+          </mat-form-field>
+    
+          <div class="dateAndClear">
+          <mat-form-field class="date">
+            <input matInput [matDatepicker]="picker" [formControl]="date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker panelClass="datepicker"></mat-datepicker>
+          </mat-form-field>
+    
+          <button mat-raised-button color="warn" (click)="clear()">Clear🕸</button>
+        </div>
+    
+        
+          
+            
+          <div class="button-group">
+            <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="emitAction()"
+                  data-cy="action"
+                >
+                𑁍{{ selectedEvent? "Edit" : "Post" }}𑁍
+                </button>
+                &nbsp;
+                
+        </div>
+          
+            
+          
+        </form>
+      </mat-card>
+    
+      </body>
+
+  </body>

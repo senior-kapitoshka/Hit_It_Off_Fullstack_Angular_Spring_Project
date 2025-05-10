@@ -1,0 +1,21 @@
+<body>
+<div class="eventCard">
+    <app-event-view [event]="event_"  (eventOut)="selectEvent($event)" [headers]="headers" [inParty]="inParty"></app-event-view>
+</div>
+
+<div class="subGroup" *ngIf="this.notMuted"> 
+    <p *ngIf="isSubscr===true" >
+        ⛧°  。🕯 🗡 You are participating in the event! 🗡 🕯 。°⛧
+    </p>
+    <p *ngIf="isSubscr===false && ((this.event_!.restrictions && this.event_!.restrictionsLimit!==this.inParty) || !this.event_!.restrictions)">
+        ⋆｡°✩ Want to take part in the event? ⚔︎ Click Subscribe! °✩𓆪༻⋆
+        </p>
+    <div *ngIf="(this.event_!.restrictions && this.event_!.restrictionsLimit!==this.inParty) || !this.event_!.restrictions || (isSubscr===true && this.event_!.restrictions)" class="subscribe" (click)="subscribe()" >✶{{isSubscr?"Unsubscribe":"Subscribe"}}✶</div>
+   
+</div>
+
+
+
+<app-comments *ngIf="this.notMuted" [comments]="this.comments"></app-comments>
+
+</body>
