@@ -28,6 +28,17 @@ export class EventViewComponent implements OnInit {
  pendingDeleteEvent: Event | null = null;
 
  private subscriptions = new Subscription();
+
+ modalImageUrl: string | null = null;
+
+openImageModal(url: string) {
+  this.modalImageUrl = url;
+}
+
+closeModal() {
+  this.modalImageUrl = null;
+}
+
  
 /////////
   constructor(

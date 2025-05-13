@@ -7,8 +7,10 @@
         <mat-card-subtitle class="subtitle">⚜ {{correctDate(event!.eventDate)}} ⚜</mat-card-subtitle>
         <mat-card-subtitle class="subtitle">{{event?.city}}</mat-card-subtitle>
         <div class="decorative-frame-img">
-          <img *ngIf="event?.eventImg" mat-card-xl-image [src]="getImageUrl(event?.eventImg)" alt="Event Image" class="foto">
+          <img *ngIf="event?.eventImg" mat-card-xl-image [src]="getImageUrl(event?.eventImg)" alt="Event Image" class="foto" (click)="openImageModal(getImageUrl(event?.eventImg))">
         </div>
+
+
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content class="content">
@@ -27,6 +29,10 @@
       </mat-card-content>
     </ng-container>
   </mat-card>
+  <div class="modal-overlay" *ngIf="modalImageUrl" (click)="closeModal()">
+    <img [src]="modalImageUrl" class="modal-image" />
+  </div>
+  
 </div>
 
 

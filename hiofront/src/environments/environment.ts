@@ -7,3 +7,14 @@ export const environment = {
     commentsURL: "http://localhost:8080/comments",
     usersURL: "http://localhost:8080/users"
 };
+
+
+/*export const environment = {
+    production: false,
+    baseURL: "/",
+    eventsURL: "/events",
+    homeURL: "/home",
+    citiesURL: "/cities",
+    commentsURL: "/comments",
+    usersURL: "/users"
+};*/

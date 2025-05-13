@@ -45,3 +45,55 @@ body{
 }
 
 
+@media (max-width: 1024px) {
+  .content {
+    font-size: 2vw;
+    min-width: 400px;
+  }
+
+  .text-center {
+    font-size: 4vw;
+  }
+
+  .text-center1 {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    font-size: 1.8vw;
+    min-width: auto;
+  }
+
+  .mat-form-field {
+    min-width: 250px;
+  }
+
+  .text-center {
+    font-size: 3.5vw;
+  }
+
+  .text-center1 {
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+
+  .mat-form-field {
+    min-width: 100%;
+  }
+
+  .text-center {
+    font-size: 1.8rem;
+  }
+
+  .text-center1 {
+    font-size: 1.2rem;
+  }
+}

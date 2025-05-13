@@ -66,9 +66,14 @@ export class AuthService implements OnInit{
 
   login(loginRequest: LoginRequest): Observable<any> {
     this.dataService.log(true);
-    return this.http.post<AuthResponse>(`${environment.baseURL}/login`, loginRequest)
+    return this.http.post<AuthResponse>(`${environment.baseURL}/login`, loginRequest
+)
     .pipe(
-      tap((data: any) => data),
+      tap((response: AuthResponse) => {
+        if (response.token) {
+          localStorage.setItem('jwtToken', response.token);
+        }
+      }),
       catchError(error => {
         console.error('Login error:', error);
         return throwError(() => new Error(error.error?.message || 'Login failed. Please try again.'));
