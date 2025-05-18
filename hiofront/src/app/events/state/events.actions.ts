@@ -4,11 +4,13 @@ import { EventView } from '../../app/models/event-view.interface';
 
 export enum EventsActions {
     GET_EVENT_LIST = '[Event] Get Event list',
+    GET_EVENT_ARCHIVE = '[Event] Get Event archive',
     GET_EVENT = '[Event] Get Event',
     SET_EVENT = '[Event] Set Event',
     GET_EVENT_TO_EDIT = '[Event] Get Event to edit',
     SET_EVENT_TO_EDIT  = '[Event] Set Event to edit',
     SET_EVENT_LIST = '[Event] Set Event list',
+    SET_EVENT_ARCHIVE = '[Event] Set Event archive',
     ADD_EVENT_API = '[Event] Add Event (API)',
     ADD_EVENT_STATE = '[Event] Add Event (STATE)',
     MODIFY_EVENT_API = '[Event] Modify Event (API)',
@@ -24,6 +26,10 @@ export enum EventsActions {
 export const getEventsList = createAction(
     EventsActions.GET_EVENT_LIST,
   );
+
+  export const getEventsArchive = createAction(
+    EventsActions.GET_EVENT_ARCHIVE,
+  );
   export const getEventData = createAction(
     EventsActions.GET_EVENT,
   );
@@ -36,6 +42,11 @@ export const getEventsList = createAction(
   EventsActions.SET_EVENT_LIST,
   props<{ events: ReadonlyArray<Event> }>(),
   );
+
+  export const setEventsArchive = createAction(
+    EventsActions.SET_EVENT_ARCHIVE,
+    props<{ archive: ReadonlyArray<Event> }>(),
+    );
 
   export const setEventData = createAction(
     EventsActions.SET_EVENT,

@@ -14,7 +14,7 @@ const routes: Routes = [
     component: JoinComponent
   },
   {
-    path: "home/settings",
+    path: "settings",
     component: UpdateComponent
   }
 ];

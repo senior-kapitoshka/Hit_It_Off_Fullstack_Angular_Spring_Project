@@ -2,7 +2,7 @@
 body{
     background-color: #d2ccbc;
     overflow: visible
-   
+
 }
 
 @font-face {
@@ -11,8 +11,8 @@ body{
 }
 
 @font-face {
-    font-family: white_storm;
-    src: url(assets/fonts/white_storm/White\ Storm.otf) format("opentype");
+    font-family: whitestorm;
+    src: url(assets/fonts/whitestorm/T4C-Beaulieux.ttf) format("opentype");
 }
 
 @font-face {

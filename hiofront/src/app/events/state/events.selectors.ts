@@ -9,6 +9,11 @@ export const selectEvents = () => createSelector(
     (state: EventsState) => state.events
 )
 
+export const selectArchive = () => createSelector(
+    selectEventsState,
+    (state: EventsState) => state.archive
+)
+
 export const selectEventData = () => createSelector(
     selectEventsState,
     (state: EventsState) => {return state.eventView}

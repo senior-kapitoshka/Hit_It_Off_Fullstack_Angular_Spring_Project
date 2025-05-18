@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 export enum CommandBarActions {
-  Create
+  Create,
+  Archive
 }
 
 

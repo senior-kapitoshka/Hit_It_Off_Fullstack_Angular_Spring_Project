@@ -1,21 +1,21 @@
 
 
 .hello {
-    font-family: 'white_storm';
+    font-family: 'whitestorm';
     font-size: 6vw;
     text-align: center;
   }
 
 
   .upcoming{
-    font-family: 'white_storm';
+    font-family: 'whitestorm';
     font-size: 6vw;
     text-align: center;
     margin: 3.5vw;
   } 
   
 .info{
-  font-family: 'white_storm';
+  font-family: 'whitestorm';
     font-size: 6vw;
     text-align: center;
 }  
@@ -55,7 +55,7 @@ body{
 
 
 .noEvents{
-  font-family: 'white_storm';
+  font-family: 'whitestorm';
     font-size: 6vw;
     text-align: center;
     margin: 3.5vw;

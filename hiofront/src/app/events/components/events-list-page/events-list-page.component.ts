@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 export enum CommandBarActions {
   Create,
-  DeleteAll
+  Archive
 }
 
 @Component({
@@ -24,14 +24,9 @@ export enum CommandBarActions {
 })
 export class EventsListPageComponent implements OnInit {
   headers:{header: string, fieldName: keyof Event}[] = [
-    //{header: "id", fieldName: "id"},
-    //{header: "creatorId", fieldName: "creatorId"},
-    //{header: "city", fieldName: "city"},
     {header: "eventName", fieldName: "eventName"},
-    //{header: "description", fieldName: "description"},
   ];
   events: ReadonlyArray<Event> = [];
-  //eventsStore$ = this.store.select(selectEvents());
   events$ = this.store.select(selectEvents());
   notMuted:boolean;
   cookieService = inject(CookieService);
@@ -73,6 +68,10 @@ export class EventsListPageComponent implements OnInit {
       switch(action) {
         case CommandBarActions.Create: {
           this.router.navigate(["events", "form"]);
+          return;
+        }
+        case CommandBarActions.Archive: {
+          this.router.navigate(["events", "archive"]);
           return;
         }
         

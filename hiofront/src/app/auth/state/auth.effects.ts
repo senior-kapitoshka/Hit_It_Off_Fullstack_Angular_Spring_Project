@@ -4,8 +4,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BehaviorSubject, EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 import { AuthService, LoginRequest,JoinRequest,UpdateRequest } from '../../core/services/auth.service';
-import { AuthActions } from './auth.actions';
+import { AuthActions, setError, setToken } from './auth.actions';
 import { inject } from '@angular/core';
+import { Action } from '@ngrx/store';
+import { of, Observable } from 'rxjs';
 
 import { HomeService  } from '../../core/services/home.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -29,7 +31,7 @@ export class AuthEffects {
     constructor(private dataService: DataService,
       ) {}
 
-  loginUser$ = createEffect(() => {
+  /*loginUser$ = createEffect(() => {
     return this.actions$.pipe(
         ofType(AuthActions.LOGIN),
         mergeMap(((data: {type: string, payload: LoginRequest}) => this.authService.login(data.payload)
@@ -40,7 +42,28 @@ export class AuthEffects {
           ))
         ))
     }, {dispatch: true}
-  );
+  );*/
+
+  loginUser$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AuthActions.LOGIN),
+    mergeMap((action: { type: string; payload: { username: string; password: string } }) =>
+      this.authService.login({
+        username: action.payload.username,
+        password: action.payload.password
+      }).pipe(
+        tap(() => this.router.navigate(['home'])),
+        map(data => setToken({ jwtToken: data.token })),
+        catchError(error =>
+          of(setError({ error: error.error?.message || 'Login failed' }))
+        )
+      )
+    )
+  )
+);
+
+
+
   
   createUser$ = createEffect(
     () => {
@@ -72,7 +95,6 @@ export class AuthEffects {
 
   updateUser$ = createEffect(
     () => {
-      console.log("update")
     return this.actions$.pipe(
         ofType(AuthActions.UPDATE),
         mergeMap(((data: {type: string, payload: UpdateRequest}) => this.authService.update(data.payload)

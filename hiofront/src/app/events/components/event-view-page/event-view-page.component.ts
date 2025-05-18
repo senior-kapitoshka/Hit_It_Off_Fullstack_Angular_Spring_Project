@@ -44,6 +44,7 @@ export class EventViewPageComponent implements OnInit {
   currentUserId!:number;
   usersPartInIds:number[]|null=null;
   notMuted:boolean=true;
+  eventIsOver = false;
   eventStore$=this.store.select(selectEventData());
 
   //импортируем объект сабскрипшион 
@@ -72,18 +73,26 @@ export class EventViewPageComponent implements OnInit {
     }
   
     assignEvent() {
-      const sub=this.eventStore$.subscribe((eventView:EventView) => {
-        if(eventView) {
-          if(eventView.event){
+      const sub = this.eventStore$.subscribe((eventView: EventView) => {
+        if (eventView) {
+          if (eventView.event) {
             this.event_ = eventView.event;
-            this.inParty=eventView.event.usersAmount;
+            this.inParty = eventView.event.usersAmount;
+    
+            // Проверка: прошло ли событие
+            const now = new Date();
+            const eventDate = new Date(eventView.event.eventDate); // предполагаем, что поле называется date
+            this.eventIsOver = eventDate < now;
           }
-          if(eventView.event)this.creatorId=eventView.event.creatorId;
-          if(eventView.comments)this.comments=eventView.comments;
-          if(eventView.usersPartInIds) this.isSubscr=eventView.usersPartInIds.includes(this.currentUserId);
+    
+          if (eventView.event) this.creatorId = eventView.event.creatorId;
+          if (eventView.comments) this.comments = eventView.comments;
+          if (eventView.usersPartInIds) {
+            this.isSubscr = eventView.usersPartInIds.includes(this.currentUserId);
+          }
         }
       });
-      //добавляем ему подписку
+      //добавляем подписку
       this.subscription.add(sub);
     }
     //отписываемся вручную чтобы не было утечек памяти

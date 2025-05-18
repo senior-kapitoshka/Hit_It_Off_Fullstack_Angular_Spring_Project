@@ -5,6 +5,7 @@ import { EventsListPageComponent } from './components/events-list-page/events-li
 import { EventsFormPageComponent } from './components/events-form-page/events-form-page.component';
 import { EventViewPageComponent } from './components/event-view-page/event-view-page.component';
 import { EventEditComponent } from './components/event-edit/event-edit.component';
+import { EventsArchivePageComponent } from './components/events-archive-page/events-archive-page.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: "form",
         component: EventsFormPageComponent,
+      },
+      {
+        path: "archive",
+        component: EventsArchivePageComponent,
       },
 
       {
@@ -31,21 +36,13 @@ export const routes: Routes = [
             component: EventEditComponent
           },
         ]
-        //component: EventViewPageComponent
+        
       },
       
     ]
   },
 
-  /*{
-    path: "form",
-    children: [
-      {
-        path: "",
-        component: EventsFormPageComponent
-      },
-    ]
-  },*/
+
 ];
 
 @NgModule({

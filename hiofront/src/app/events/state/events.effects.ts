@@ -30,6 +30,21 @@ export class EventsEffects {
     );
   });
 
+  getArchive$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EventsActions.GET_EVENT_ARCHIVE),
+      mergeMap(() =>
+        this.eventsService.getArchive().pipe(
+          map((archive) => ({
+            type: EventsActions.SET_EVENT_ARCHIVE,
+            archive,
+          })),
+          catchError(() => EMPTY)
+        )
+      )
+    );
+  });
+
   // Получить информацию о событии
   getEventView$ = createEffect(() => {
     return this.actions$.pipe(

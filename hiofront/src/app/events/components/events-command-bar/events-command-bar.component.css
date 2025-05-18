@@ -1,12 +1,27 @@
-.bar{
-    display: inline-flex;
-    align-content: baseline;
-    margin: 2rem;
-}
-.createButton{
-   /* background-color: #a09782;*/
+.bar {
+    margin: 0.5rem 0 3rem;
     font-family: 'charming';
     font-size: 6vw;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .createButton,
+  .archiveButton {
     color: black;
-    /*box-shadow: 0px 8px 16px 0px #dbcca3;;*/
-}
+    /* можно добавить background-color и box-shadow */
+  }
+  
+  .icon {
+    font-size: 6vw;
+    text-align: center;
+  }
+  

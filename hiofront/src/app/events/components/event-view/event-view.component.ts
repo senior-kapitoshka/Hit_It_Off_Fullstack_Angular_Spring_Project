@@ -26,6 +26,7 @@ export class EventViewComponent implements OnInit {
  cookieService = inject(CookieService);
  creatorId?:number;
  pendingDeleteEvent: Event | null = null;
+ isMobileView = false;
 
  private subscriptions = new Subscription();
 
@@ -56,7 +57,18 @@ closeModal() {
       if(id!=null)this.currentUserId = id?id:parseInt(this.cookieService.get("id"));
     });
     this.subscriptions.add(id);
+
+    this.checkScreenSize();
+    window.addEventListener('resize', this.checkScreenSize.bind(this));
+  
   }
+
+
+
+checkScreenSize(): void {
+  this.isMobileView = window.innerWidth < 768;
+}
+
 
   getHeaderFields() {
      this.eventNamesFields = this.headers.map((data) =>data.fieldName);
@@ -94,7 +106,7 @@ confirmDelete() {
     
     getImageUrl(imageName: string | undefined|null): string {
       const baseUrl = environment.baseURL || 'http://localhost:8080'; 
-      return imageName ? `${baseUrl}/uploads/${imageName}` : '';
+      return imageName ? `${baseUrl}uploads/${imageName}` : '';
     }
   
 

@@ -2,12 +2,14 @@ import { Component, Input, OnInit, Output,EventEmitter, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AuthActions } from '../../state/auth.actions';
 //import { selectError } from '../../auth/state/auth.selectors';
 import { AppState } from '../../../app/state/app.state';
 
 import { DataService } from '../../../core/services/data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   standalone:false,
@@ -15,15 +17,16 @@ import { DataService } from '../../../core/services/data.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
-  
+  error$: Observable<string>;
+
   constructor(
     private store: Store<AppState>,
     private service: AuthService,
     private router: Router,
-  ) { 
+  ) {
 
     this.checkJWT();
-
+    this.error$ = this.store.pipe(select(state => state.authState.error));
   }
 
   ngOnInit(): void {

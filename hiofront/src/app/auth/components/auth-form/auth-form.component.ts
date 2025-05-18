@@ -1,17 +1,19 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder,  FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../../app/models/user.interface';
 import { HomeService} from '../../../../app/core/services/home.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-auth-form',
   standalone:false,
   templateUrl: './auth-form.component.html',
-  styleUrl: './auth-form.component.css'
+  styleUrl: './auth-form.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class AuthFormComponent implements OnInit,OnChanges{
-  @Input() error: string = "";
+
   @Input() title: string = "Login"
   @Input() userDetails: User|null=null
   @Output() submitEmitter = new EventEmitter();
@@ -24,14 +26,30 @@ export class AuthFormComponent implements OnInit,OnChanges{
   
   about?:string;
 
-  constructor(private fb: FormBuilder) {
+  private lastErrorShown: string | null = null;
+
+@Input()
+set error(value: string | null) {
+  if (value && value !== this.lastErrorShown) {
+    this.snackBar.open(`♖ ${value} ♖`, '', {
+      duration: 3000,
+      panelClass: ['custom-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+    this.lastErrorShown = value;
+  }
+}
+
+  constructor(private fb: FormBuilder,
+    private snackBar: MatSnackBar) {
 
     this.form = this.fb.group({
-      username: [''],
-      password: [''],
-      email:[''],
-      city:[''],
-      about:[''],
+      username: ['',Validators.required],
+      password: ['',Validators.required],
+      email:['',Validators.required],
+      city:['',Validators.required],
+      about:['',Validators.required],
     })
 
   }
@@ -48,6 +66,7 @@ export class AuthFormComponent implements OnInit,OnChanges{
       this.about=this.userDetails!.about;
     }catch{
     }
+    
   }
 
   checkAction() {
@@ -62,11 +81,32 @@ export class AuthFormComponent implements OnInit,OnChanges{
   }
 
   emitAction() {
-    if(this.title==="Login")
+    if(this.title==="Login"){
+      if (this.form.get('username')?.invalid || this.form.get('password')?.invalid) {
+        this.snackBar.open(`⸸ Please fill out all required fields ⸸`, '', {
+          duration: 3000,
+          panelClass: ['custom-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.form.markAllAsTouched();
+        return;
+      }
           this.submitEmitter.emit({username:this.form.value.username,
             password:this.form.value.password,});
-    else  if(this.title==="Join")    this.submitEmitter.emit(this.form.value); 
-    else  if(this.title==="Update") this.submitEmitter.emit({
+    }else  if(this.title==="Join"){
+      if (this.form.invalid) {
+        this.snackBar.open(`⸸ Please fill out all required fields ⸸`, '', {
+          duration: 3000,
+          panelClass: ['custom-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.form.markAllAsTouched();
+        return;
+      }
+         this.submitEmitter.emit(this.form.value); 
+    }else  if(this.title==="Update") this.submitEmitter.emit({
       email:this.form.value.email,
       city:this.form.value.city,
       about:this.form.value.about,

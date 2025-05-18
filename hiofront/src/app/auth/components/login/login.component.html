@@ -1,2 +1,2 @@
 
-<app-auth-form title="Login" (submitEmitter)="submitForm($event)"></app-auth-form>
+<app-auth-form [error]="error$ | async" title="Login" (submitEmitter)="submitForm($event)"></app-auth-form>

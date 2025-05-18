@@ -1,9 +1,18 @@
-<p class="bar">
-    <mat-toolbar>
-        <button class="createButton" mat-raised-button  (click)="emitAction(0)">
-            
-      🗡 Create event 🗡
-           
-        </button>  
-    </mat-toolbar>
-</p>
+<div class="bar">
+  <mat-toolbar class="toolbar">
+    <button class="createButton" mat-raised-button (click)="emitAction(0)">
+      Create event
+    </button>
+
+    <span class="spacer"></span>
+
+    <span class="icon">🗡</span>
+
+    <span class="spacer"></span>
+
+    <button class="archiveButton" mat-raised-button (click)="emitAction(1)">
+      Archive
+    </button>
+  </mat-toolbar>
+</div>
+

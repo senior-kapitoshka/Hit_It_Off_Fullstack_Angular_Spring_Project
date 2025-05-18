@@ -10,6 +10,18 @@ body{
   background-position-y: 85%;
 }
 
+.custom-snackbar {
+  text-align: center;
+  border-color: rgb(59, 59, 4);
+  box-shadow: 0px 8px 16px 0px #dbcca3;;
+  width:100%;
+  font-family: 'whitestorm';
+  font-size:1.5rem;
+  color: black;
+  background-color: #d0cab8;
+  opacity:0.7;
+}
+
 
   .mat-form-field {
     width: 100%;
@@ -27,8 +39,8 @@ body{
 
 
 .text-center{
-  font-family: 'cardinal';
-    font-size: 5vw; 
+  font-family: 'cardinal' !important;
+    font-size: 5vw !important; 
 }
 
 .text-center1{

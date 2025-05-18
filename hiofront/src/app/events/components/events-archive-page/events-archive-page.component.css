@@ -1,0 +1,28 @@
+body{
+    min-height: 100vh;
+    width:  100%;
+    background-image: url("/assets/png/sand_clock.png");
+    background-blend-mode:overlay;
+  background-size: 37vw 35vw;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-position-y: 78%;
+  }
+
+  .header{
+    background-color: #dbcca3;;
+   color: rgb(86, 49, 49);
+   
+   padding: 1rem;
+   
+   border-radius: 8px;
+   
+   border: 1px solid #444;
+   
+   font-family: 'cardinal';
+    font-size: 2rem;
+    display: grid;
+    text-align: center;
+
+  }

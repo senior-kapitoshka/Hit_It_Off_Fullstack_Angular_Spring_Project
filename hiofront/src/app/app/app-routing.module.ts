@@ -21,14 +21,14 @@ export const routes: Routes = [
     loadChildren: () =>
     import("../auth/auth.module").then((m) => m.AuthModule), 
   },
+  { path: "settings", component: UpdateComponent,
+    loadChildren: () =>
+    import("../auth/auth.module").then((m) => m.AuthModule),
+    canActivate: [ authGuard], 
+  },
   { path: "home",
   loadChildren: () =>
     import("../home/home.module").then((m) => m.HomeModule),
-    canActivate: [ authGuard], 
-  },
-  { path: "home/settings", component: UpdateComponent,
-    loadChildren: () =>
-    import("../auth/auth.module").then((m) => m.AuthModule),
     canActivate: [ authGuard], 
   },
   {

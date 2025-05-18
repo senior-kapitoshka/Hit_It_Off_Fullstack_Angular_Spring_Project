@@ -6,7 +6,7 @@
         <mat-card-title class="title"> ⚔ {{event?.eventName}} ⚔ </mat-card-title>
         <mat-card-subtitle class="subtitle">⚜ {{correctDate(event!.eventDate)}} ⚜</mat-card-subtitle>
         <mat-card-subtitle class="subtitle">{{event?.city}}</mat-card-subtitle>
-        <div class="decorative-frame-img">
+        <div class="decorative-frame-img" *ngIf="event?.eventImg">
           <img *ngIf="event?.eventImg" mat-card-xl-image [src]="getImageUrl(event?.eventImg)" alt="Event Image" class="foto" (click)="openImageModal(getImageUrl(event?.eventImg))">
         </div>
 
@@ -32,7 +32,7 @@
   <div class="modal-overlay" *ngIf="modalImageUrl" (click)="closeModal()">
     <img [src]="modalImageUrl" class="modal-image" />
   </div>
-  
+
 </div>
 
 
@@ -61,7 +61,7 @@
           participants: {{this.inParty}}/{{event?.restrictionsLimit}}
         </mat-card-content>
       </ng-container>
-  
+
       <ng-container *ngIf="!event?.restrictions">
         <mat-card-content class="party">
           participants: {{this.inParty}}
@@ -69,35 +69,52 @@
       </ng-container>
     </mat-card>
   </div>
-  
+
   </div>
 
 <div *isGranted="'ROLE_ADMIN'">
 
-<table mat-table [dataSource]="[event]" class="mat-elevation-z8">
+<!-- Таблица для средних и больших экранов -->
+<div class="table-wrapper" *ngIf="!isMobileView">
+  <table mat-table [dataSource]="[event]" class="mat-elevation-z8 full-table">
     <ng-container *ngFor="let item of headers" [matColumnDef]="item.fieldName">
-      <th mat-header-cell *matHeaderCellDef [style.font-size]="'2vw'" [style.font-family]="'white_storm'"> {{item.header}} </th>
-      <td mat-cell *matCellDef="let element"[style.font-size]="'2vw'"  [style.font-family]="'cardinal'"> {{item.fieldName!=='usersAmount'?element[item.fieldName]:this.inParty}} </td>
+      <th mat-header-cell *matHeaderCellDef class="header-cell" [style.font-family]="'whitestorm'">
+        {{item.header}}
+      </th>
+      <td mat-cell *matCellDef="let element" class="cell" [style.font-family]="'cardinal'">
+        {{item.fieldName !== 'usersAmount' ? element[item.fieldName] : inParty}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-     <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element"> 
-      </td>    
-    </ng-container>  
-      <tr mat-header-row *matHeaderRowDef="eventNamesFields"></tr> 
-           
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="eventNamesFields"></tr>
     <tr mat-row *matRowDef="let row; columns: eventNamesFields"></tr>
   </table>
 </div>
 
-@if (event!=null?(event!.creatorId===this.currentUserId):(true)){  
+<!-- Карточки для мобильных -->
+<div class="card-wrapper" *ngIf="isMobileView">
+  <div class="event-card">
+    <div class="card-item" *ngFor="let item of headers" [style.font-family]="'cardinal'">
+      <strong [style.font-family]="'whitestorm'">{{item.header}}:</strong>
+      {{item.fieldName !== 'usersAmount' ? event![item.fieldName] : inParty}}
+    </div>
+  </div>
+</div>
+
+</div>
+
+@if (event!=null?(event!.creatorId===this.currentUserId):(true)){
   <div class="controlGroup">
     <button (click)="selectEvent(event!, 2)" mat-raised-button color="primary">
       🕸 Edit 🕸
-  </button>  
+  </button>
   &nbsp;
-  <button (click)="pendingDeleteEvent = event!" 
+  <button (click)="pendingDeleteEvent = event!"
   mat-raised-button
   color="warn"
   data-bs-toggle="modal"

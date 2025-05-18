@@ -38,6 +38,14 @@ export class UsersListComponent implements OnInit, AfterViewInit {
 
   @Output() event = new EventEmitter<{user: User, action: TableActions}>();
   
+  isMobileView: boolean = false;
+
+
+checkScreenSize(): void {
+  this.isMobileView = window.innerWidth < 768;
+}
+
+
   dataSource = new MatTableDataSource<User>();
 
   eventNamesFields: string[] = [];
@@ -46,6 +54,9 @@ export class UsersListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getHeaderFields();
+    this.checkScreenSize();
+    window.addEventListener('resize', this.checkScreenSize.bind(this));
+  
   }
 
   /*вызывается один раз после того, 

@@ -1,0 +1,6 @@
+<body>
+    <p class="header">⛓ here you can find events that have already passed ⛓</p>
+    <ng-container *ngIf="events$ | async as events">
+        <app-events-list [events]="events" (event)="selectEvent($event)" [headers]="headers"></app-events-list>
+    </ng-container>
+</body>

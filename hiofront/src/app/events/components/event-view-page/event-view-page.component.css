@@ -32,3 +32,20 @@ body{
     font-size: 4vw;
     cursor: pointer;
  }
+
+ .event-over-banner {
+   background-color: #dbcca3;;
+   color: rgb(86, 49, 49);
+   
+   padding: 1rem;
+   
+   border-radius: 8px;
+   
+   border: 1px solid #444;
+   
+   font-family: 'cardinal';
+    font-size: 3rem;
+    display: grid;
+    text-align: center;
+ }
+ 

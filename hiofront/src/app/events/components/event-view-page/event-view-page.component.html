@@ -1,4 +1,8 @@
 <body>
+    <div *ngIf="eventIsOver" class="event-over-banner">
+        ⋆༺𓆩☠︎︎ The event has already passed. ☠︎︎𓆪༻⋆
+      </div>
+
 <div class="eventCard">
     <app-event-view [event]="event_"  (eventOut)="selectEvent($event)" [headers]="headers" [inParty]="inParty"></app-event-view>
 </div>

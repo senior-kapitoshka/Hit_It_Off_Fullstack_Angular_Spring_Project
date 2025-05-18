@@ -21,13 +21,13 @@ export class EventsService {
    )
   }
 
-  /*getEvent(data: any): Observable<Event> {
+  getArchive(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${environment.eventsURL}/archive`).pipe(
+      tap((data: Event[]) => data),
+      catchError(err => throwError(() => err))
+   )
+  }
 
-    return this.http.get<Event>(`${environment.eventsURL}/${data.id}`).pipe(
-       tap((data: Event) => data),
-       catchError(err => throwError(() => err))
-    )
-   }*/
 
    getEventView(data: any): Observable<EventView> {
 

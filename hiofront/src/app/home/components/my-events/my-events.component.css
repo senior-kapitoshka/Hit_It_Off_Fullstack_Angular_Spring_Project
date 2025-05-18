@@ -21,7 +21,7 @@ body{
     }
 
     .pagination {
-        font-family: 'white_storm';
+        font-family: 'whitestorm';
         font-size: 4vw !important;
       }
       ul.pagination li.page-item a.page-link {

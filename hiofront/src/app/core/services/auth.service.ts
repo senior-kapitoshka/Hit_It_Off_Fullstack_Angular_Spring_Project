@@ -54,8 +54,9 @@ export class AuthService implements OnInit{
       this.dataService.currentState.subscribe(dataService=>this.isLogged = dataService);
     }
 
+
   join(joinRequest: JoinRequest): Observable<any> {
-    return this.http.post<AuthResponse>(`${environment.baseURL}/join`, joinRequest)
+    return this.http.post<AuthResponse>(`${environment.baseURL}join`, joinRequest)
     .pipe(
       catchError(error => {
         console.error('Registration error:', error);
@@ -65,13 +66,13 @@ export class AuthService implements OnInit{
   }
 
   login(loginRequest: LoginRequest): Observable<any> {
-    this.dataService.log(true);
-    return this.http.post<AuthResponse>(`${environment.baseURL}/login`, loginRequest
+    return this.http.post<AuthResponse>(`${environment.baseURL}login`, loginRequest
 )
     .pipe(
       tap((response: AuthResponse) => {
         if (response.token) {
           localStorage.setItem('jwtToken', response.token);
+          this.dataService.log(true);
         }
       }),
       catchError(error => {
@@ -82,27 +83,27 @@ export class AuthService implements OnInit{
   }
 
   getUser(): Observable<User> {
-    return this.http.get<User>(`${environment.baseURL}/home/settings`).pipe(
+    return this.http.get<User>(`${environment.baseURL}api/settings`).pipe(
        tap((data: User) => data),
-       
+
        catchError(err => throwError(() => err))
     )
    }
 
   update(updateRequest: UpdateRequest): Observable<any> {
-    return this.http.put<AuthResponse>(`${environment.homeURL}/settings`, updateRequest)
+    return this.http.put<AuthResponse>(`${environment.baseURL}api/settings`, updateRequest)
     .pipe(
       tap((data: any) => data),
     );
   }
-  
+
 
   isAuthenticated(): boolean {
     const token = this.getToken();
     if (!token ) {
       return false;
     }
-    
+
     return !this.jwtHelper.isTokenExpired(token);
   }
 

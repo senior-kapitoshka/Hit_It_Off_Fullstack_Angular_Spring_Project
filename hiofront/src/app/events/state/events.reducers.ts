@@ -1,11 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import {Event} from '../../app/models/event.interface'
-import { setEventData,setEventDataToEdit,setEventsList,addEventsState,modifyEventsState, subscrEventsState, deleteEventsState } from './events.actions';
+import { setEventData,setEventDataToEdit,setEventsList,addEventsState,modifyEventsState, subscrEventsState, deleteEventsState, setEventsArchive } from './events.actions';
 import { EventView } from '../../app/models/event-view.interface';
 
 export interface EventsState {
     eventToEdit:Readonly<Event>,
     events: ReadonlyArray<Event>;
+    archive: ReadonlyArray<Event>;
     eventView:Readonly<EventView>
 }
 
@@ -23,6 +24,7 @@ export const initialState: EventsState = {
       eventImg:''
       },
     events: [],
+    archive: [],
     eventView:{
       event:{
         id:0,
@@ -45,6 +47,7 @@ export const initialState: EventsState = {
 export const EventsReducer = createReducer(
   initialState,
   on(setEventsList, (state, { events }) => { return {...state, events}}),
+  on(setEventsArchive, (state, { archive }) => { return {...state, archive}}),
 
   on(setEventData, (state, { eventView }) => { return {...state, eventView}}),
   on(setEventDataToEdit, (state, { eventToEdit}) => { return {...state, eventToEdit}}),

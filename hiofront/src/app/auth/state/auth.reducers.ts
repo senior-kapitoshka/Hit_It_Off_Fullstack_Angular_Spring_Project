@@ -19,11 +19,6 @@ export const initialState: AuthState = {
         city:"",
         about:"",
         eventsAmount:0,
-        /*role:{
-            id: 0,
-            username: '',
-            uid: 'ROLE_USER'
-          }*/
           role:''
     },
     error: null
@@ -33,8 +28,13 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(setToken, (state, { jwtToken }) => { return {...state, jwtToken}}),
+  on(setToken, (state, { jwtToken }) => ({
+    ...state,
+    jwtToken,
+    error: null // 💡 сбрасываем ошибку при успешном логине
+  })),
   on(setError, (state, { error }) => { return {...state, error}}),
   on(setUser, (state, { user }) => { return {...state, user}}),
+  on(setError, (state, { error }) => ({ ...state, error })),
   on(Logout, () => ({ ...initialState })) 
   );

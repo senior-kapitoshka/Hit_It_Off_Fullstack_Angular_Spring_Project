@@ -33,6 +33,7 @@ import {MatNativeDateModule } from  '@angular/material/core'
 import { SharedMdModule } from '../shared/shared-md/shared-md.module';
 import { MatExpansionModule,MatAccordion } from '@angular/material/expansion';
 import { IsGrantedDirective } from '../app/directives/is-granted.directive';
+import { EventsArchivePageComponent } from './components/events-archive-page/events-archive-page.component';
 @NgModule({
   declarations: [
     
@@ -47,6 +48,7 @@ import { IsGrantedDirective } from '../app/directives/is-granted.directive';
     EventsListPageComponent,
     EventsFormPageComponent,
     EventEditComponent,
+    EventsArchivePageComponent,
     
   ],
   imports: [
