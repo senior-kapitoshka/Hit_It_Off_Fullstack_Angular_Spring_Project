@@ -1,13 +1,14 @@
 app:
-  clientUrl: http://localhost:4200
+  clientUrl: ${CLIENT_URL}  # будет подставляться из переменной окружения
+
 spring:
   application:
     name: HIO
   datasource:
-    url: jdbc:postgresql://localhost:5432/HIO
+    url: jdbc:postgresql://dpg-d0ll11nfte5s739kmmg0-a.postgresql.render.com:5432/hio
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: root
+    username: kapitoshka
+    password: 7BDRNNLbTy2rhum5ZuL66yY6CGxyPpJc
     initialization-mode: always
     continue-on-error: true
   jpa:
@@ -37,12 +38,13 @@ logging:
       springframework:
         security: DEBUG
         web: DEBUG
+
 token:
   signing:
     key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
 
 upload:
-  dir: C:/Users/me/Desktop/codewars/imgs/uploads
+  dir: /tmp/uploads  # обязательно: Render разрешает писать только в /tmp
 
 imgur:
   client-id: 2628b8a518c0e20
