@@ -1,19 +1,22 @@
-# Используем образ с Maven и Node.js
-FROM node:18-bullseye-slim AS build
-
-# Установка Maven
-RUN apt-get update && apt-get install -y maven openjdk-17-jdk && apt-get clean
+# Stage 1: Build
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
+# Копируем всё, включая frontend
 COPY pom.xml ./
 COPY src ./src
+COPY hiofront ./hiofront
 
 RUN mvn clean package -DskipTests
 
-# Финальный образ (если нужно только JAR)
-FROM openjdk:17
-COPY --from=build /app/target/*.jar /app/app.jar
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Stage 2: Run
+FROM eclipse-temurin:17-jdk
 
+WORKDIR /app
 
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
