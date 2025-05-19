@@ -43,3 +43,6 @@ token:
 
 upload:
   dir: C:/Users/me/Desktop/codewars/imgs/uploads
+
+imgur:
+  client-id: 2628b8a518c0e20

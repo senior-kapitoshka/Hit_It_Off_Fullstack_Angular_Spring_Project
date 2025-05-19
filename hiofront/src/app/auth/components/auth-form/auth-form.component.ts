@@ -95,7 +95,7 @@ set error(value: string | null) {
           this.submitEmitter.emit({username:this.form.value.username,
             password:this.form.value.password,});
     }else  if(this.title==="Join"){
-      if (this.form.invalid) {
+      if (this.form.get('username')?.invalid || this.form.get('password')?.invalid || this.form.get('email')?.invalid) {
         this.snackBar.open(`⸸ Please fill out all required fields ⸸`, '', {
           duration: 3000,
           panelClass: ['custom-snackbar'],

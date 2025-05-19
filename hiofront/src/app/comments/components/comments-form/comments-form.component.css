@@ -1,51 +1,96 @@
 .comment-form-textarea {
   font-family: 'charming';
   font-size: 2.5vw;
-    width: 60%;
-    height: 80px;
-    margin-bottom: 1vw;
-    margin-top: 1vw;
-    border-color: rgb(59, 59, 4);
-    box-shadow: 0px 8px 16px 0px #dbcca3;;
-    border-radius: 12%;
-    opacity:0.7;
-    background-color: #d0cab8;
+  width: 60%;
+  height: 80px;
+  margin-bottom: 1vw;
+  margin-top: 1vw;
+  border-color: rgb(59, 59, 4);
+  box-shadow: 0px 8px 16px 0px #dbcca3;
+  border-radius: 12%;
+  opacity: 0.7;
+  background-color: #d0cab8;
+}
+
+/* Кнопка отправки и отмены */
+.comment-form-button {
+  font-size: 2vw;
+  padding: 8px 16px;
+  background: #d0cab8;
+  border-color: rgb(59, 59, 4);
+  box-shadow: 0px 8px 16px 0px #dbcca3;
+  border-radius: 8px;
+  color: black;
+  font-family: 'cardinal';
+  height: 5vw;
+  width: 13vw;
+}
+
+.comment-form-button:hover:enabled {
+  cursor: pointer;
+  background: #dbcca3;
+}
+
+.comment-form-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.comment-form-cancel-button {
+  margin-left: 10px;
+}
+
+/* Основная форма и кнопки */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 🌐 Медиазапросы — адаптивность */
+
+/* Средние экраны (планшеты) */
+@media (max-width: 768px) {
+  .comment-form-textarea {
+    width: 80%;
+    font-size: 4vw;
   }
-  
+
   .comment-form-button {
-    font-size: 16px;
-    padding: 8px 16px;
-    background: #d0cab8;
-    border-color: rgb(59, 59, 4);
-    box-shadow: 0px 8px 16px 0px #dbcca3;;
-    border-radius: 8px;
-    color: black;
-    font-family: 'cardinal';
-    font-size:2vw;
-    height: 5vw;
-    width: 13vw;
+    width: 30vw;
+    height: auto;
+    font-size: 3vw;
   }
-  
-  .comment-form-button:hover:enabled {
-    cursor: pointer;
-    background: #dbcca3;;
+}
+
+/* Маленькие экраны (телефоны) */
+@media (max-width: 480px) {
+  .comment-form-textarea {
+    width: 90%;
+    font-size: 5vw;
+    height: 100px;
   }
-  
-  .comment-form-button:disabled {
-    opacity: 0.7;
-    cursor: default;
+
+  .comment-form-button {
+    width: 40vw;
+    font-size: 4vw;
+    height: auto;
   }
-  
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .comment-form-cancel-button {
-    margin-left: 10px;
+    margin-left: 0;
   }
-
-  .form{
-    display:flex;
-    justify-content: space-evenly;
-  }
-
-  .buttonGroup{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+}

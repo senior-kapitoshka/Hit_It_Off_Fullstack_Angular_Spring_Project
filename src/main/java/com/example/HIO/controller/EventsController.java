@@ -122,11 +122,28 @@ public class EventsController {
         currentUser.getEventsPartIn().add(event);
         currentUser.setEventsAmount(currentUser.getEventsAmount() + 1);
 
-        // Сохраняем событие с изображением
-        EventEntity savedEvent = eventService.addEvent(event, imageFile);
+        // Если файл изображения передан — сохраняем его на диск и задаём имя в событии
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+                Path uploadPath = Paths.get(uploadDir);
+                Files.createDirectories(uploadPath);
+                Path filePath = uploadPath.resolve(fileName);
+                Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                event.setEventImg(fileName);
+                log.info("Saving event with image name: {}", event.getEventImg());
+// Устанавливаем имя файла в поле события
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to store image file", e);
+            }
+        }
 
+        // Сохраняем событие
+        EventEntity savedEvent = eventService.addEvent(event, null);
+        System.out.println("Event saved with id: "+ savedEvent.getId());
         return ResponseEntity.ok(savedEvent);
     }
+
 
     @GetMapping(value = "/events")
     public List<Event> getEvents(Pageable pageable) {
@@ -210,16 +227,6 @@ public class EventsController {
         return convertToEventDto(eventService.findEventById(id));
     }
 
-    /*@PutMapping("/events/{id}/edit")
-    public void putEvent(@PathVariable Integer id, @RequestBody Event event) {
-        if (!id.equals(event.getId())) throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST,
-                "id does not match"
-        );
-
-        var eventEntity = convertToEventEntity(event);
-        eventService.updateEvents(id, eventEntity);
-    }*/
 
     @PutMapping("/events/{id}/edit")
     public void updateEvent(@PathVariable Integer id,
@@ -291,43 +298,6 @@ public class EventsController {
     }
 
 
-
-    /*@PutMapping("/events/{id}/edit")
-    public void updateEvent(@PathVariable Integer id,
-                                                   @RequestPart("event") EventEntity event,
-                                                   @RequestPart(value = "eventImg", required = false) MultipartFile imageFile) {
-        // Проверяем, что id события из пути совпадает с id в теле запроса
-        if (!id.equals(event.getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id does not match");
-        }
-
-        // Получаем существующее событие
-        EventEntity existingEvent = eventService.findEventById(id);
-
-        // Обновляем изображение, если оно передано
-        if (imageFile != null && !imageFile.isEmpty()) {
-            try {
-                String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
-                Path uploadPath = Paths.get("uploads");
-                Files.createDirectories(uploadPath);
-                Path filePath = uploadPath.resolve(fileName);
-                Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                event.setEventImg(fileName); // Устанавливаем новое изображение
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to store image file", e);
-            }
-        } else {
-            // Если изображение не передано, оставляем старое
-            event.setEventImg(existingEvent.getEventImg());
-        }
-
-        // Обновляем другие данные события
-        event.setId(id); // Устанавливаем ID для обновления
-
-        // Сохраняем обновленное событие
-        eventService.updateEvents(id,event);
-
-    }*/
 
 
     @PatchMapping("/events/{id}/edit")

@@ -6,6 +6,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { ImageService } from '../../../core/services/image.service';
+
 @Component({
   selector: 'app-events-form',
   standalone: false,
@@ -23,7 +25,7 @@ export class EventsFormComponent implements OnInit, OnChanges {
   readonly date = new FormControl(new Date()); // Для даты, используем FormControl
   selectedFile: File | null = null; // Переменная для хранения выбранного файла
 
-  constructor(private fb: FormBuilder,private snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder,private snackBar: MatSnackBar,private imageService: ImageService) {
     this.form = this.fb.group({
       id: [],
       creatorId: [parseInt(this.cookieService.get('id'))],
@@ -82,25 +84,51 @@ export class EventsFormComponent implements OnInit, OnChanges {
       this.form.markAllAsTouched();
       return;
     }
-    const eventPayload = {
-      creatorId: parseInt(this.cookieService.get('id')),
-      city: this.form.value.city,
-      eventName: this.form.value.eventName,
-      eventDate:  this.form.value.eventDate ,
-      description: this.form.value.description,
-      usersAmount: this.form.value.usersAmount,
-      restrictions: this.restrict,
-      restrictionsLimit: this.restrict ? this.form.value.restrictionsLimit : 0,
-      eventImg: null
+  
+    const prepareAndEmit = (eventImg: string | null) => {
+      const eventPayload = {
+        creatorId: parseInt(this.cookieService.get('id')),
+        city: this.form.value.city,
+        eventName: this.form.value.eventName,
+        eventDate: this.form.value.eventDate,
+        description: this.form.value.description,
+        usersAmount: this.form.value.usersAmount,
+        restrictions: this.restrict,
+        restrictionsLimit: this.restrict ? this.form.value.restrictionsLimit : 0,
+        eventImg // теперь сюда добавляем URL от Imgur
+      };
+  
+      this.action.emit({
+        payload: {
+          event: eventPayload,
+          eventImg: this.selectedFile
+        }
+      });
     };
   
-    this.action.emit({
-      payload: {
-        event: eventPayload,
-        eventImg: this.selectedFile || null
-      }
-    });
+    if (this.selectedFile) {
+      this.imageService.uploadImage(this.selectedFile).subscribe({
+        next: (link) => {
+          console.log('[Imgur] Uploaded to:', link);
+          prepareAndEmit(link);
+        },
+        error: (err) => {
+          console.error('[Imgur Upload Error]', err);
+          console.error('Status:', err.status);
+          console.error('Error body:', err.error);
+          this.snackBar.open(`Image upload failed 🥀 (status: ${err.status})`, '', {
+            duration: 4000,
+            panelClass: ['custom-snackbar'],
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+                  });
+                }
+              });
+            } else {
+              prepareAndEmit(null); // без картинки
+            }
   }
+  
   
   
 

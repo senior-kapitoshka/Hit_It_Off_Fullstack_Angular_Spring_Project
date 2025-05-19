@@ -40,15 +40,15 @@ closeModal() {
   this.modalImageUrl = null;
 }
 
- 
+
 /////////
   constructor(
-    private dataService:DataService) { 
+    private dataService:DataService) {
     /*this.dataService.currentId.subscribe(id=>{
-      
+
         if(id!=null)this.currentUserId = id?id:parseInt(this.cookieService.get("id"));
       });*/
-      
+
   }
 /////////
   ngOnInit(): void {
@@ -60,7 +60,7 @@ closeModal() {
 
     this.checkScreenSize();
     window.addEventListener('resize', this.checkScreenSize.bind(this));
-  
+
   }
 
 
@@ -83,7 +83,7 @@ checkScreenSize(): void {
 
 confirmDelete() {
   if (this.pendingDeleteEvent) {
-    this.selectEvent(this.pendingDeleteEvent, 1); 
+    this.selectEvent(this.pendingDeleteEvent, 1);
     this.pendingDeleteEvent = null;
 
     const modalEl = document.getElementById('deleteConfirmModal');
@@ -103,11 +103,19 @@ confirmDelete() {
     return res;
   }
 
-    
+
     getImageUrl(imageName: string | undefined|null): string {
-      const baseUrl = environment.baseURL || 'http://localhost:8080'; 
-      return imageName ? `${baseUrl}uploads/${imageName}` : '';
+      /*const baseUrl = environment.baseURL || 'http://localhost:8080';
+      return imageName ? `${baseUrl}uploads/${imageName}` : '';*/
+
+       // Если imageUrl уже полный URL (начинается с http), возвращаем как есть
+        if (imageName?.startsWith('http')) {
+          return imageName;
+        }
+        // Иначе считаем, что это локальное имя файла
+        const baseUrl = environment.baseURL || 'http://localhost:8080';
+        return imageName ? `${baseUrl}uploads/${imageName}` : '';
     }
-  
+
 
 }

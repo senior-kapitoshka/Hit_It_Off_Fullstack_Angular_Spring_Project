@@ -50,4 +50,9 @@ export class DataService {
     this.role.next(role);
   }
 
+get currentIdValue(): number {
+  return this.id.getValue();
+}
+
+
 }

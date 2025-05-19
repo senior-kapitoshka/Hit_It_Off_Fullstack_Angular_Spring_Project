@@ -8,18 +8,19 @@
     </app-comments-form>
     
     <div class="comments-container">
-      <app-comments-edit
-        *ngFor="let comment of  getRootComments()"
-        [comment]="comment"
-        [replies]="getReplies(comment.commentId)"
-        [activeComment]="activeComment"
-        (setActiveComment)="setActiveComment($event)"
-        (addComment)="addComment($event)"
-        (deleteComment)="deleteComment($event)"
-        (updateComment)="updateComment($event)"
-        [currentUserId]="currentUserId"
-      >
-
-      </app-comments-edit>
+      <ng-container *ngIf="currentUserId !== null">
+        <app-comments-edit
+          *ngFor="let comment of getRootComments()"
+          [comment]="comment"
+          [replies]="getReplies(comment.commentId)"
+          [activeComment]="activeComment"
+          (setActiveComment)="setActiveComment($event)"
+          (addComment)="addComment($event)"
+          (deleteComment)="deleteComment($event)"
+          (updateComment)="updateComment($event)"
+          [currentUserId]="currentUserId"
+        ></app-comments-edit>
+      </ng-container>
+      
     </div>
   </div>

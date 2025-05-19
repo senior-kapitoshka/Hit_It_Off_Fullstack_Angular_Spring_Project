@@ -146,7 +146,6 @@ import { Subscription } from 'rxjs';
 })
 export class CommentsComponent implements OnInit, OnDestroy {
   @Input() comments: Comment[] = [];
-  currentUserId: number | null = null;
   id: number;
   activeComment: ActiveComment | null = null;
   action: { type: string, commentId: number | null } | null = null;
@@ -163,13 +162,15 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.id = this.actRouter.snapshot.params['id'];
   }
 
+  // Геттер для получения текущего пользователя
+  get currentUserId(): number | null {
+    const idFromDataService = this.dataService.currentIdValue;
+    if (idFromDataService && idFromDataService > 0) return idFromDataService;
+    if (this.cookieService.check('id')) return parseInt(this.cookieService.get('id'));
+    return null;
+  }
+  
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.dataService.currentId.subscribe(id => {
-        this.currentUserId = id ?? (this.cookieService.check('id') ? parseInt(this.cookieService.get("id")) : null);
-      })
-    );
-
     this.subscriptions.add(
       this.updates$
         .pipe(
