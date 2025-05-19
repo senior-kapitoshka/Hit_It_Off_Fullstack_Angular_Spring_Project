@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # === STAGE 1: Build frontend + backend ===
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 
@@ -10,23 +9,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install
 
 WORKDIR /app
 
-# Копируем pom, исходники фронта и бэка
-=======
-# === STAGE 1: Build ===
-FROM maven:3.9.6-eclipse-temurin-21 as build
-
-# Установка пакетов для сборки node-gyp (npm native модули)
-RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-
-# Копируем pom.xml и frontend
->>>>>>> cde64ecf4af2a18a76b9c23202e19dbcb57d8170
+# Копируем pom.xml, frontend и backend исходники
 COPY pom.xml .
 COPY hiofront ./hiofront
 COPY src ./src
 
-<<<<<<< HEAD
 # Проверка версий (опционально)
 RUN node -v
 RUN npm -v
@@ -34,25 +21,7 @@ RUN npm -v
 # Собираем проект (frontend-maven-plugin внутри сделает npm install + сборку фронтенда)
 RUN mvn clean package -DskipTests
 
-
 # === STAGE 2: Минимальный образ для запуска ===
-FROM eclipse-temurin:21-jre-alpine
-
-WORKDIR /app
-
-# Копируем собранный jar из первого этапа
-COPY --from=build /app/target/*.jar app.jar
-
-# Опционально: указать порт (если используется)
-EXPOSE 8080
-
-# Запуск
-=======
-# Запускаем сборку, где frontend-maven-plugin сделает npm install и соберет фронт,
-# а backend соберется в fat jar с фронтом внутри
-RUN mvn clean package -DskipTests
-
-# === STAGE 2: Run ===
 FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
@@ -60,6 +29,8 @@ WORKDIR /app
 # Копируем собранный jar из build стадии
 COPY --from=build /app/target/*.jar app.jar
 
-# Запускаем приложение
->>>>>>> cde64ecf4af2a18a76b9c23202e19dbcb57d8170
+# Открываем порт, если нужно (опционально)
+EXPOSE 8080
+
+# Запуск приложения
 ENTRYPOINT ["java","-jar","app.jar"]
