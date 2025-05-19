@@ -1,33 +1,27 @@
-# === STAGE 1: Build Angular + Spring Boot ===
+# === STAGE 1: Build ===
 FROM maven:3.9.6-eclipse-temurin-21 as build
 
-# Установка системных зависимостей (для npm пакетов, которым нужен node-gyp)
+# Установка пакетов для сборки node-gyp (npm native модули)
 RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
 
-# Установка Node.js 20 (Angular 19 не поддерживает Node 22!)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    node -v && npm -v
-
-# Создаем рабочую директорию
 WORKDIR /app
 
-# Копируем backend и frontend проекты
+# Копируем pom.xml и frontend
 COPY pom.xml .
 COPY hiofront ./hiofront
 COPY src ./src
 
-# Установка Node и NPM версий через frontend-maven-plugin
-# Установка зависимостей и сборка frontend + backend
+# Запускаем сборку, где frontend-maven-plugin сделает npm install и соберет фронт,
+# а backend соберется в fat jar с фронтом внутри
 RUN mvn clean package -DskipTests
 
-# === STAGE 2: Create minimal JRE image ===
-FROM eclipse-temurin:21-jre
+# === STAGE 2: Run ===
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-# Копируем готовый JAR из предыдущего stage
+# Копируем собранный jar из build стадии
 COPY --from=build /app/target/*.jar app.jar
 
-# Запуск Spring Boot приложения
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Запускаем приложение
+ENTRYPOINT ["java","-jar","app.jar"]
