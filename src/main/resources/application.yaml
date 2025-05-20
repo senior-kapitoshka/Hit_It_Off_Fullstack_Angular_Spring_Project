@@ -39,6 +39,9 @@ spring:
   resources:
     static-locations: classpath:/static/
 
+server:
+  port: ${PORT:8080}  # важно! Порт для запуска сервера из переменной окружения PORT или 8080 по умолчанию
+
 logging:
   level:
     org:
@@ -51,7 +54,7 @@ token:
     key: ${TOKEN_SIGNING_KEY}  # Задайте этот ключ через переменные окружения
 
 upload:
-  dir: /tmp/uploads  # В Render разрешено писать только сюда
+  dir: /tmp/uploads  # В Render и Railway обычно можно писать только сюда
 
 imgur:
   client-id: ${IMGUR_CLIENT_ID}  # Тоже через переменные окружения

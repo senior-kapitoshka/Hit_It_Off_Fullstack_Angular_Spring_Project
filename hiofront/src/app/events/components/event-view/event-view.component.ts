@@ -5,7 +5,7 @@ import { DataService } from '../../../core/services/data.service';
 import { TableActions } from '../../../app/models/page-actions.enum';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
-//import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 declare let bootstrap: any;
 
 @Component({
@@ -113,8 +113,8 @@ confirmDelete() {
           return imageName;
         }
         // Иначе считаем, что это локальное имя файла
-        const baseUrl = `${window.location.origin}/` 
-        //|| 'http://localhost:8080';
+        const baseUrl = environment.baseURL 
+        || 'http://localhost:8080';
         return imageName ? `${baseUrl}uploads/${imageName}` : '';
     }
 
