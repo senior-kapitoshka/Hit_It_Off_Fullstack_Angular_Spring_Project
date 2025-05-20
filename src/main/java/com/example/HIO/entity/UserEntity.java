@@ -37,10 +37,10 @@ public class UserEntity implements UserDetails {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "city", unique = false, nullable = false)
+    @Column(name = "city", unique = false, nullable = true)
     private String city;
 
-    @Column(name = "about", unique = false, nullable = false)
+    @Column(name = "about", nullable = true)
     private String about;
 
     @Enumerated(EnumType.STRING)
