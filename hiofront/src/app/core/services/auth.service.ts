@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable,OnInit, inject } from '@angular/core';
 import { BehaviorSubject, Observable , throwError} from 'rxjs';
-import { environment } from '../../../environments/environment';
+//import { environment } from '../../../environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -39,6 +39,9 @@ export interface AuthResponse{
   providedIn: 'root',
 })
 export class AuthService implements OnInit{
+
+  private baseURL = `${window.location.origin}/`;
+
   isLogged:boolean;
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ : Observable<User | null> = this.userSubject.asObservable();
@@ -56,7 +59,8 @@ export class AuthService implements OnInit{
 
 
   join(joinRequest: JoinRequest): Observable<any> {
-    return this.http.post<AuthResponse>(`${environment.baseURL}join`, joinRequest)
+    //return this.http.post<AuthResponse>(`${environment.baseURL}join`, joinRequest)
+    return this.http.post<AuthResponse>(`${this.baseURL}join`, joinRequest)
     .pipe(
       catchError(error => {
         console.error('Registration error:', error);
@@ -66,7 +70,8 @@ export class AuthService implements OnInit{
   }
 
   login(loginRequest: LoginRequest): Observable<any> {
-    return this.http.post<AuthResponse>(`${environment.baseURL}login`, loginRequest
+    //return this.http.post<AuthResponse>(`${environment.baseURL}login`, loginRequest
+    return this.http.post<AuthResponse>(`${this.baseURL}login`, loginRequest
 )
     .pipe(
       tap((response: AuthResponse) => {
@@ -83,7 +88,8 @@ export class AuthService implements OnInit{
   }
 
   getUser(): Observable<User> {
-    return this.http.get<User>(`${environment.baseURL}api/settings`).pipe(
+    //return this.http.get<User>(`${environment.baseURL}api/settings`).pipe(
+      return this.http.get<User>(`${this.baseURL}api/settings`).pipe(
        tap((data: User) => data),
 
        catchError(err => throwError(() => err))
@@ -91,7 +97,8 @@ export class AuthService implements OnInit{
    }
 
   update(updateRequest: UpdateRequest): Observable<any> {
-    return this.http.put<AuthResponse>(`${environment.baseURL}api/settings`, updateRequest)
+    //return this.http.put<AuthResponse>(`${environment.baseURL}api/settings`, updateRequest)
+    return this.http.put<AuthResponse>(`${this.baseURL}api/settings`, updateRequest)
     .pipe(
       tap((data: any) => data),
     );

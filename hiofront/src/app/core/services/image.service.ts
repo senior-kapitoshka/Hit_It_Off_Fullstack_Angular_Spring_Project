@@ -7,6 +7,8 @@ import { catchError, map, throwError } from 'rxjs';
 })
 export class ImageService {
 
+  private baseURL = window.location.origin; // Динамический URL текущего сайта
+
   private IMGUR_UPLOAD_URL = 'https://api.imgur.com/3/image';
   private CLIENT_ID = '2628b8a518c0e20'; 
 
@@ -16,7 +18,7 @@ export class ImageService {
       const formData = new FormData();
       formData.append('image', file);
   
-      return this.http.post<any>('http://localhost:8080/api/images/upload', formData).pipe(
+      return this.http.post<any>(`${this.baseURL}/api/images/upload`, formData).pipe(
         map(res => res.data.link) // res.data.link — это Imgur-ссылка от Spring Boot
     );
   }

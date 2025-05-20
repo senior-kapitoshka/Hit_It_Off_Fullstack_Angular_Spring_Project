@@ -1,4 +1,4 @@
-
+/*
 
 export const environment = {
     production: true,
@@ -9,3 +9,4 @@ export const environment = {
     commentsURL: "http://localhost:8080/api/comments",
     usersURL: "http://localhost:8080/api/users"
 };
+*/
