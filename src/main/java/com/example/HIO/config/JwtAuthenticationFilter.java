@@ -27,17 +27,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserService userService;
 
-    /*@Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getServletPath();
-
-        return path.equals("/") ||
-                path.equals("/index.html") ||
-                path.equals("/login") ||
-                path.equals("/join") ||
-                path.startsWith("/static") ||
-                path.matches(".*\\.(js|css|html|png|jpg|jpeg|woff2|ttf|svg)$");
-    }*/
 
     @Override
     protected void doFilterInternal(
@@ -47,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String path = request.getServletPath();
-        if (path.equals("/login") || path.equals("/join") || path.startsWith("/static") || path.equals("/favicon.ico") ||path.equals("/get-admin")) {
+        if (path.equals("/login") || path.equals("/join") || path.startsWith("/static") || path.equals("/favicon.ico") ) {
             filterChain.doFilter(request, response);
             return;
         }

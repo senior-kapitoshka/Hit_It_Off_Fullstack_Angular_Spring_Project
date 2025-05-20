@@ -85,7 +85,7 @@ public class AuthController {
         return "Hello, admin!";
     }
 
-    @GetMapping("/get-admin")
+    @GetMapping("/api/get-admin")
     @Operation(summary = "get ROLE_ADMIN status")
     public void getAdmin() {
         userService.getAdmin();

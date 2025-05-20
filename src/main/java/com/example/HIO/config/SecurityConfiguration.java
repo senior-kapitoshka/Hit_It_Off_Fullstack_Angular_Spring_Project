@@ -65,8 +65,7 @@ public class SecurityConfiguration {
                                 //"/",
                                 "/**",
                                 "/login"
-                                ,"/join",
-                                "/get-admin"
+                                ,"/join"
                                 ).permitAll()
                         .requestMatchers("/users").hasRole("ADMIN")
                         .requestMatchers("/uploads/**").permitAll()
