@@ -11,8 +11,7 @@ public class FrontendController {
             ,"/events/**"
             ,"/home/**",
             "/cities/**",
-            "/settings",
-            "/get-admin"
+            "/settings"
     })
     public String handleOtherPaths() {
         return "forward:/index.html";

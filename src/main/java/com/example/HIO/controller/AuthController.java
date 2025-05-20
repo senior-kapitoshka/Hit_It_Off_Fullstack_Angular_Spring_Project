@@ -78,5 +78,17 @@ public class AuthController {
         authenticationService.updateUserData(request,id,username,password,role,eventsAmount,events);
         //return authenticationService.updateUserData(request,id,role);
     }
+    @GetMapping("/admin")
+    @Operation(summary = "ROLE_ADMIN only")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String mainAdmin() {
+        return "Hello, admin!";
+    }
+
+    @GetMapping("/get-admin")
+    @Operation(summary = "get ROLE_ADMIN status")
+    public void getAdmin() {
+        userService.getAdmin();
+    }
 
 }

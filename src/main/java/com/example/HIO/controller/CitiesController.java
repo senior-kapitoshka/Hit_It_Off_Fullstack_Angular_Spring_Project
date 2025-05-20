@@ -88,17 +88,6 @@ public class CitiesController {
 
 
     /// //////////////////////////////////
-    @GetMapping("/admin")
-    @Operation(summary = "ROLE_ADMIN only")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String mainAdmin() {
-        return "Hello, admin!";
-    }
 
-    @GetMapping("/get-admin")
-    @Operation(summary = "get ROLE_ADMIN status")
-    public void getAdmin() {
-        UserService.getAdmin();
-    }
     /// //////////////////////////////
 }
