@@ -1,27 +1,37 @@
+# === STAGE 1: Build frontend + backend ===
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
-# Этап 1: билд бекенда и фронта
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+# Установка nodejs и системных зависимостей для сборки npm
+RUN apt-get update && apt-get install -y curl python3 make g++ && rm -rf /var/lib/apt/lists/*
 
+# Установка Node.js 18 (или другую нужную версию)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs
 
-# Копируем pom.xml в корень контейнера
+WORKDIR /app
+
+# Копируем pom, исходники фронта и бэка
 COPY pom.xml .
-
-# Копируем исходники backend (src) и frontend (hiofront)
-COPY src ./src
 COPY hiofront ./hiofront
+COPY src ./src
 
-# Собираем проект (maven соберет фронт и бэкенд согласно твоему pom.xml)
-RUN mvn clean package -X -DskipTests --verbose
+# Проверка версий (опционально)
+RUN node -v
+RUN npm -v
+
+# Собираем проект (frontend-maven-plugin внутри сделает npm install + сборку фронтенда)
+RUN mvn clean package -DskipTests
 
 
-# Этап 2: runtime образ с JRE
-FROM eclipse-temurin:23-jre
+# === STAGE 2: Минимальный образ для запуска ===
+FROM eclipse-temurin:21-jre-alpine
 
-# Копируем собранный jar в корень образа
-COPY --from=build target/HIO-0.0.1-SNAPSHOT.jar ./HIO-0.0.1-SNAPSHOT.jar
+WORKDIR /app
 
-# Открываем порт приложения
+# Копируем собранный jar из первого этапа
+COPY --from=build /app/target/*.jar app.jar
+
+# Опционально: указать порт (если используется)
 EXPOSE 8080
 
-# Запускаем приложение
-ENTRYPOINT ["java", "-jar", "HIO-0.0.1-SNAPSHOT.jar"]
+# Запуск
+ENTRYPOINT ["java","-jar","app.jar"]
