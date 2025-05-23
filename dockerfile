@@ -28,7 +28,7 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Копируем собранный jar из первого этапа
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /target/*.jar app.jar
 
 # Опционально: указать порт (если используется)
 EXPOSE 8080
