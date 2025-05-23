@@ -11,9 +11,8 @@ COPY src ./src
 COPY hiofront ./hiofront
 
 # Собираем проект (maven соберет фронт и бэкенд согласно твоему pom.xml)
-RUN mvn clean package -X -DskipTests
+RUN mvn clean package -X -DskipTests || (cat /root/.npm/_logs/*-debug-0.log && false)
 
-RUN npm install || (cat /root/.npm/_logs/*-debug-0.log && false)
 
 # Этап 2: runtime образ с JRE
 FROM eclipse-temurin:23-jre
