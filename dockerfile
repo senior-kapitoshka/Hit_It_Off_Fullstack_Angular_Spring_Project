@@ -5,7 +5,7 @@ FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Копируем backend jar (собранный заранее)
-COPY backend/target/app.jar ./app.jar
+COPY target/app.jar ./app.jar
 
 # Копируем готовый фронтенд (сборку)
 COPY hiofront/dist ./static
