@@ -17,7 +17,7 @@ COPY src ./src
 # Проверка версий (опционально)
 RUN node -v
 RUN npm -v
-
+RUN npm install -g npm@10.9.2
 # Собираем проект (frontend-maven-plugin внутри сделает npm install + сборку фронтенда)
 RUN mvn clean package -DskipTests
 
