@@ -1,5 +1,6 @@
 # Этап 1: билд бекенда и фронта
-FROM maven:3.9.3-jdk-17 AS build
+FROM maven:3.9.3-openjdk-17 AS build
+
 
 # Копируем pom.xml в корень контейнера
 COPY pom.xml .
