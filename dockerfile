@@ -1,46 +1,42 @@
-# --- Этап 1: Build Angular frontend ---
-FROM node:18 AS frontend-builder
+# --- Этап 1: Сборка Angular frontend ---
+FROM node:18 AS frontend
 
 WORKDIR /app/hiofront
 
-# Копируем package.json и package-lock.json для кэширования зависимостей
+# Копируем зависимости
 COPY hiofront/package*.json ./
+RUN npm install
 
-RUN npm ci
-
-# Копируем весь фронтенд код
+# Копируем остальной код и билдим
 COPY hiofront/ ./
-
-# Собираем фронтенд
 RUN npm run build
 
-# --- Этап 2: Build Spring Boot backend ---
-FROM maven:3.9.6-eclipse-temurin-17 AS backend-builder
+# --- Этап 2: Сборка Spring Boot backend + копирование фронта ---
+FROM maven:3.9.6-eclipse-temurin-17 AS backend
 
 WORKDIR /app
 
-# Копируем pom.xml и package.json для кэширования зависимостей
+# Кэшим зависимости
 COPY pom.xml ./
-COPY hiofront/package*.json ./hiofront/
-
 RUN mvn dependency:go-offline
 
-# Копируем весь проект
-COPY . ./
+# Копируем остальной backend код
+COPY . .
 
-# Копируем собранный фронтенд из первого этапа в папку, где Spring Boot будет брать статику
-COPY --from=frontend-builder /app/hiofront/dist ./hiofront/dist
+# Копируем фронтенд в Spring Boot (ожидается, что Spring ищет в /static)
+RUN rm -rf src/main/resources/static/*
+COPY --from=frontend /app/hiofront/dist/ ./src/main/resources/static/
 
-# Запускаем сборку jar, frontend уже будет скопирован в target/classes/static
+# Сборка JAR
 RUN mvn clean package -DskipTests
 
-# --- Этап 3: Минимальный рантайм образ ---
+# --- Этап 3: Минимальный runtime ---
 FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-# Копируем jar из предыдущего шага
-COPY --from=backend-builder /app/target/*.jar app.jar
+# Копируем jar
+COPY --from=backend /app/target/*.jar app.jar
 
 EXPOSE 8080
 
