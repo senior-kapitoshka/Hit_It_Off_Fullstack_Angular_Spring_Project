@@ -1,5 +1,5 @@
 # Этап 1: билд бекенда и фронта
-FROM maven:3.9.3-eclipse-temurin-23 as build
+FROM maven:3.9.3-jdk-17 AS build
 
 # Копируем pom.xml в корень контейнера
 COPY pom.xml .
