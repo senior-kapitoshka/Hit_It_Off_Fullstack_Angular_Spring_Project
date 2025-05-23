@@ -11,7 +11,7 @@ COPY src ./src
 COPY hiofront ./hiofront
 
 # Собираем проект (maven соберет фронт и бэкенд согласно твоему pom.xml)
-RUN mvn clean package -X -DskipTests || (cat /root/.npm/_logs/*-debug-0.log && false)
+RUN mvn clean package -X -DskipTests --verbose
 
 
 # Этап 2: runtime образ с JRE
