@@ -3,12 +3,12 @@ FROM maven:3.9.4-eclipse-temurin-17 as builder
 
 WORKDIR /app
 
-# Копируем только необходимые файлы для сборки backend
-COPY backend/pom.xml backend/
-COPY backend/src backend/src/
+# Копируем pom.xml и src для сборки backend из корня
+COPY pom.xml .
+COPY src ./src
 
 # Собираем backend без тестов
-RUN mvn -f backend/pom.xml clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Этап запуска
 FROM eclipse-temurin:17-jre
@@ -16,9 +16,9 @@ FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Копируем собранный jar из builder
-COPY --from=builder /app/backend/target/app.jar ./app.jar
+COPY --from=builder /app/target/app.jar ./app.jar
 
-# Копируем готовую сборку фронтенда (предполагается, что папка hiofront/dist есть рядом с Dockerfile)
+# Копируем готовую сборку фронтенда из папки hiofront/dist (предварительно собрать локально!)
 COPY hiofront/dist ./static
 
 # Запускаем backend
