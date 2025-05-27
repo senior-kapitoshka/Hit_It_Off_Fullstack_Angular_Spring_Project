@@ -18,8 +18,8 @@
 
 ---
 <p float="left">
-  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/mordor.png" width="50%" />
-  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/comments.png" width="50%" />
+  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/mordor.png" width="45%" />
+  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/comments.png" width="45%" />
 </p>
 ---
 
