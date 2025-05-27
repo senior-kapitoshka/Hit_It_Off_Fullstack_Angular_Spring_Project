@@ -3,6 +3,8 @@
 Веб-приложение, созданное на **Angular 19**, **Spring Boot** и **Bootstrap**, предназначено для поиска единомышленников и участия в совместных мероприятиях.
 
 ---
+![Main](https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/main.png)
+---
 
 ## 📌 Возможности
 
