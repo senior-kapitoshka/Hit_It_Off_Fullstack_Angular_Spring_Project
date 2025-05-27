@@ -21,6 +21,8 @@
 - 📱 Адаптивный интерфейс под малые и средние экраны (Bootstrap)
 
 ---
+## Немного скриншотов:
+
 <p float="left">
   <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/mordor.png" width="45%" />
   <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/comments.png" width="45%" />
@@ -36,6 +38,10 @@
   <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/404.png" width="45%" />
 </p>
 
+---
+## Демо
+ 
+- https://hit-it-off-fullstack-angular-spring.onrender.com/
 
 ---
 
@@ -47,10 +53,6 @@
 - **Аутентификация**: JWT
 - **Стили**: Bootstrap (адаптивность, сетка)
 
----
-## Демо
- 
-- https://hit-it-off-fullstack-angular-spring.onrender.com/
 ---
 
 ## 🚀 Установка и запуск
