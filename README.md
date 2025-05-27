@@ -3,7 +3,7 @@
 Веб-приложение, созданное на **Angular 19**, **Spring Boot** и **Bootstrap**, предназначено для поиска единомышленников и участия в совместных мероприятиях.
 
 ---
-![Main](https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/main.png)
+![Main](https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/main.png)
 ---
 
 ## 📌 Возможности
@@ -18,8 +18,13 @@
 
 ---
 <p float="left">
-  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/mordor.png" width="45%" />
-  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/scrinshots/comments.png" width="45%" />
+  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/mordor.png" width="45%" />
+  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/comments.png" width="45%" />
+</p>
+
+<p float="left">
+  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/phone.png" width="45%" />
+  <img src="https://github.com/senior-kapitoshka/Hit_It_Off_Fullstack_Angular_Spring_Project/blob/main/screenshots/users.png" width="45%" />
 </p>
 
 
